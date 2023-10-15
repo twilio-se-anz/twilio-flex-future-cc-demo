@@ -11,11 +11,8 @@ on:
     branches:
       - main
     paths:
-      - 'plugin-flex-ts-template-v2/**'
+      - 'flex-template-future-cc-demo/**'
       - 'serverless-functions/**'
-# FEATURE: schedule-manager
-      - 'serverless-schedule-manager/**'
-# END FEATURE: schedule-manager
   # Enable running this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -35,15 +32,10 @@ jobs:
       - name: Install packages
         run: |
           npm install --no-save eslint
-          cd plugin-flex-ts-template-v2
+          cd flex-template-future-cc-demo
           npm install
           cd ../serverless-functions
           npm install
-# FEATURE: schedule-manager
-      - name: Install schedule manager packages
-        working-directory: serverless-schedule-manager
-        run: npm install
-# END FEATURE: schedule-manager
       - name: Run eslint
         run: npm run lint:report
         continue-on-error: true
@@ -83,13 +75,13 @@ jobs:
         with:
           node-version: '16'
       - name: Install packages
-        working-directory: ./plugin-flex-ts-template-v2
+        working-directory: ./flex-template-future-cc-demo
         run: npm install
       - name: Run tests
-        working-directory: ./plugin-flex-ts-template-v2
+        working-directory: ./flex-template-future-cc-demo
         run: npm run test:ci
       - name: Publish test results
         uses: mikepenz/action-junit-report@v3
         if: always()
         with:
-          report_paths: './plugin-flex-ts-template-v2/test-results/junit.xml'
+          report_paths: './flex-template-future-cc-demo/test-results/junit.xml'

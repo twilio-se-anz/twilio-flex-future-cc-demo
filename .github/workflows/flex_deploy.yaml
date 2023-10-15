@@ -86,14 +86,6 @@ jobs:
           npm install
           npm run install-serverless-plugin
           npm run deploy-env
-# FEATURE: schedule-manager
-      - name: deploy serverless-schedule-manager
-        working-directory: serverless-schedule-manager
-        run: |
-          npm install
-          npm run install-serverless-plugin
-          npm run deploy-env
-# END FEATURE: schedule-manager
 
   deploy-terraform:
     needs: [perform-initial-serverless-release]
@@ -140,52 +132,12 @@ jobs:
           echo "### Configuration output"  >> $GITHUB_STEP_SUMMARY
           npm install --ignore-scripts
           npm run postinstall -- --packages=serverless-functions >> $GITHUB_STEP_SUMMARY
-# FEATURE: chat-to-video-escalation
-      - name: install npm and build video-app-assets
-        run: |
-          echo "### chat-to-video-escalation configuration output"  >> $GITHUB_STEP_SUMMARY
-          npm run postinstall -- --packages=web-app-examples/twilio-video-demo-app >> $GITHUB_STEP_SUMMARY
-# END FEATURE: chat-to-video-escalation
       - name: deploy serverless
         working-directory: serverless-functions
         run: |
           npm run install-serverless-plugin
           npm run deploy-env
 
-# FEATURE: schedule-manager
-  deploy-schedule-manager:
-    if: |
-      always() &&
-      !contains(needs.*.result, 'failure') &&
-      !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
-    env:
-      ENVIRONMENT: ${{ inputs.environment }}
-    needs: [deploy-terraform]
-    steps:
-      - uses: actions/checkout@v3
-      - name: setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: set github environment variables
-        env:
-          SECRETS_CONTEXT: ${{ toJson(secrets) }}
-          VARS_CONTEXT: ${{ toJson(vars) }}
-        run: scripts/github-set-env.sh
-      - name: install top-level packages
-        run: |
-          echo "### Job summary" >> $GITHUB_STEP_SUMMARY
-          echo " - Environment: ${{ env.ENVIRONMENT }}"  >> $GITHUB_STEP_SUMMARY
-          npm install --ignore-scripts
-          npm run postinstall -- --packages=serverless-schedule-manager,flex-config
-      - name: deploy serverless-schedule-manager
-        working-directory: serverless-schedule-manager
-        run: |
-          npm run install-serverless-plugin
-          npm run deploy-env
-# END FEATURE: schedule-manager
 
   deploy-flex-config:
     if: |
@@ -199,9 +151,6 @@ jobs:
       OVERWRITE_CONFIG: ${{ inputs.initial_release == true || inputs.overwrite_config == true }}
     needs:
       - deploy-serverless
-# FEATURE: schedule-manager
-      - deploy-schedule-manager
-# END FEATURE: schedule-manager
     steps:
       - uses: actions/checkout@v3
       - name: setup node.js
@@ -234,7 +183,7 @@ jobs:
       TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
       TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
       TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
-      PLUGIN_FOLDER: plugin-flex-ts-template-v2
+      PLUGIN_FOLDER: flex-template-future-cc-demo
     steps:
       - uses: actions/checkout@v3
       - name: setup node.js

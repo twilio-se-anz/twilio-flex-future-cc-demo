@@ -1,8 +1,0 @@
-{
-    "PSAudioRecorder": "Grabador de Audio",
-    "PSRecordingMessage": "Grabación en curso",
-    "StartRecButton": "Iniciar Grabación",
-    "StopRecButton": "Detener Grabación",
-    "RemoveRecButton": "Descartar Grabación",
-    "MicBlockedMessage": "Permita que esta página acceda a su micrófono antes de utilizar este recurso."
-}
