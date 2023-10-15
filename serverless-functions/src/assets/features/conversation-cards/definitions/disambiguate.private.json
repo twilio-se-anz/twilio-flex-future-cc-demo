@@ -1,0 +1,34 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "I need more help",
+          "data": {
+            "text": "I need more help"
+          },
+          "style": "positive"
+        },
+        {
+          "type": "Action.Submit",
+          "title": "Dispute transaction",
+          "data": {
+            "text": "Dispute transaction"
+          }
+        },
+        {
+          "type": "Action.Submit",
+          "title": "Talk to an agent",
+          "data": {
+            "text": "Talk to an agent"
+          }
+        }
+      ]
+    }
+  ]
+}

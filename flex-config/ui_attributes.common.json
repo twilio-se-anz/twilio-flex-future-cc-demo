@@ -5,26 +5,19 @@
     }
   },
   "custom_data": {
-    "common": {
-      "log_level": "info",
-      "teams": [
-        "Blue Team",
-        "Red Team",
-        "Gold Team",
-        "VIP Team"
-      ],
-      "departments": [
-        "General Management",
-        "Marketing",
-        "Operations",
-        "Finance",
-        "Sales",
-        "Human Resources",
-        "Purchasing",
-        "Customer Service",
-        "Recruiting"
-      ]
-    },
-    "features": {}
+    "features": {
+      "message_drop_zone": {
+        "enabled": true
+      },
+      "adaptive_cards": {
+        "enabled": true
+      },
+      "panel2_multitabs": {
+        "enabled": true
+      },
+      "ai_responses": {
+        "enabled": true
+      }
+    }
   }
 }
