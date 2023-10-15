@@ -1,0 +1,23 @@
+{
+  "PSBargeCoachAgentAssistanceTriggered": "{{agentFN}} está solicitando assistência.",
+  "PSBargeCoachTurnOffAssistance": "Desativar assistência",
+  "PSBargeCoachAskForAssistance": "Solicitar assistência",
+  "PSBargeCoachAssistanceRequired": "Solicitação de assistência",
+  "PSBargeCoachBargeIn": "Acompanhar chamada",
+  "PSBargeCoachAgentSeekingAssistance": "Agente buscando assistência",
+  "PSBargeCoachBargeOut": "Sair da chamada",
+  "PSBargeCoachEnableCoach": "Ativar modo sombra",
+  "PSBargeCoachDisableCoach": "Desativar modo sombra",
+  "PSBargeCoachAgentCoachedBy": "Você está sendo assistido por:",
+  "PSBargeCoachAssistanceAlertsEnabled": "Alertas de Assistência do Agente Habilitados",
+  "PSBargeCoachAssistanceAlertsDisabled": "Alertas de Assistência do Agente Desativados",
+  "PSBargeCoachActiveSupervisors": "Supervisores Ativos:",
+  "PSBargeCoachNone": "Nenhum",
+  "PSBargeCoachDisablePrivacy": "Desativar modo privado",
+  "PSBargeCoachEnablePrivacy": "Ativar Modo Privado",
+  "PSBargeCoachPrivacyOn": "Privacidade ativada",
+  "PSBargeCoachPrivacyOff": "Privacidade Desativada",
+  "PSBargeCoachMonitorPanelBarge": "{{supervisor}} entrou na chamada",
+  "PSBargeCoachMonitorPanelCoaching": "{{supervisor}} está assistindo",
+  "PSBargeCoachMonitorPanelMonitoring": "{{supervisor}} está monitorando"
+}

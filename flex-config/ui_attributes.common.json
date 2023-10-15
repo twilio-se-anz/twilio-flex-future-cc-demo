@@ -1,0 +1,364 @@
+{
+  "sdkOptions": {
+    "voice": {
+      "allowIncomingWhileBusy": true
+    }
+  },
+  "custom_data": {
+    "common": {
+      "log_level": "info",
+      "teams": [
+        "Blue Team",
+        "Red Team",
+        "Gold Team",
+        "VIP Team"
+      ],
+      "departments": [
+        "General Management",
+        "Marketing",
+        "Operations",
+        "Finance",
+        "Sales",
+        "Human Resources",
+        "Purchasing",
+        "Customer Service",
+        "Recruiting"
+      ]
+    },
+    "features": {
+      "activity_skill_filter": {
+        "enabled": true,
+        "rules": {
+          "On a Task": {
+            "required_skill": "system_activities",
+            "sort_order": 0
+          },
+          "On a Task, No ACD": {
+            "required_skill": "system_activities",
+            "sort_order": 0
+          },
+          "Wrap Up": {
+            "required_skill": "system_activities",
+            "sort_order": 0
+          },
+          "Wrap Up, No ACD": {
+            "required_skill": "system_activities",
+            "sort_order": 0
+          },
+          "Offline": {
+            "required_skill": null,
+            "sort_order": 100
+          }
+        },
+        "filter_teams_view": true
+      },
+      "callback_and_voicemail": {
+        "enabled": true,
+        "allow_requeue": true,
+        "max_attempts": 3,
+        "auto_select_task": true
+      },
+      "caller_id": {
+        "enabled": true,
+        "include_outgoing_only_numbers": true
+      },
+      "conversation_transfer": {
+        "enabled": true,
+        "cold_transfer": true,
+        "multi_participant": true
+      },
+      "chat_to_video_escalation": {
+        "enabled": true
+      },
+      "conference": {
+        "enabled": true,
+        "hold_workaround": false
+      },
+      "enhanced_crm_container": {
+        "enabled": true,
+        "url": "{{serverless.url}}/features/enhanced-crm-container/index.html?line1={{task.from}}&line2={{task.direction}}",
+        "should_display_url_when_no_tasks": true,
+        "display_url_when_no_tasks": "{{serverless.url}}/features/enhanced-crm-container/index.html",
+        "enable_url_tab": true,
+        "url_tab_title": "Web Page"
+      },
+      "internal_call": {
+        "enabled": true
+      },
+      "scrollable_activities": {
+        "enabled": true
+      },
+      "supervisor_barge_coach": {
+        "enabled": true,
+        "agent_coaching_panel": true,
+        "supervisor_monitor_panel": true,
+        "agent_assistance": true,
+        "supervisor_alert_toggle": true
+      },
+      "omni_channel_capacity_management": {
+        "enabled": false,
+        "channel": "chat",
+        "default_max_capacity": 2
+      },
+      "device_manager": {
+        "enabled": true,
+        "input_select": false
+      },
+      "dual_channel_recording": {
+        "enabled": false,
+        "channel": "worker"
+      },
+      "pause_recording": {
+        "enabled": true,
+        "include_silence": false,
+        "indicator_banner": false,
+        "indicator_permanent": true
+      },
+      "activity_reservation_handler": {
+        "enabled": false,
+        "system_activity_names": {
+          "available": "Available",
+          "onATask": "On a Task",
+          "onATaskNoAcd": "On a Task, No ACD",
+          "wrapup": "Wrap Up",
+          "wrapupNoAcd": "Wrap Up, No ACD"
+        }
+      },
+      "teams_view_filters": {
+        "enabled": true,
+        "log_filters": false,
+        "applied_filters": {
+          "activities": true,
+          "email": true,
+          "department": true,
+          "queue_no_worker_data": false,
+          "queue_worker_data": false,
+          "team": true,
+          "agent_skills": true
+        }
+      },
+      "supervisor_capacity": {
+        "enabled": true
+      },
+      "schedule_manager": {
+        "enabled": true
+      },
+      "multi_call": {
+        "enabled": false
+      },
+      "hang_up_by": {
+        "enabled": true
+      },
+      "chat_transfer": {
+        "enabled": false
+      },
+      "agent_automation": {
+        "enabled": true,
+        "configuration": [
+          {
+            "channel": "voice",
+            "auto_accept": false,
+            "auto_select": true,
+            "auto_wrapup": true,
+            "required_attributes": [],
+            "wrapup_time": 30000,
+            "default_outcome": "Automatically completed"
+          },
+          {
+            "channel": "chat",
+            "auto_accept": false,
+            "auto_select": true,
+            "auto_wrapup": true,
+            "required_attributes": [],
+            "wrapup_time": 30000,
+            "default_outcome": "Automatically completed"
+          }
+        ]
+      },
+      "supervisor_complete_reservation": {
+        "enabled": true,
+        "outcome": "Completed by supervisor"
+      },
+      "canned_responses": {
+        "enabled": true,
+        "location": "MessageInputActions"
+      },
+      "keyboard_shortcuts": {
+        "enabled": true
+      },
+      "custom_hold_music": {
+        "enabled": false,
+        "url": ""
+      },
+      "custom_transfer_directory": {
+        "enabled": true,
+        "use_paste_search_icon": false,
+        "queue": {
+          "enabled": true,
+          "show_only_queues_with_available_workers": false,
+          "show_real_time_data": true,
+          "enforce_queue_filter_from_worker_object": true,
+          "enforce_global_exclude_filter": false,
+          "global_exclude_filter": ""
+        },
+        "external_directory": {
+          "enabled": true,
+          "skipPhoneNumberValidation": false,
+          "directory": [
+            {
+              "cold_transfer_enabled": true,
+              "warm_transfer_enabled": true,
+              "label": "Sample Entry",
+              "number": "+10000000000"
+            }
+          ]
+        }
+      },
+      "dispositions": {
+        "enabled": true,
+        "enable_notes": true,
+        "require_disposition": false,
+        "global_dispositions": ["Resolved", "Not Resolved", "Follow-up Required", "Escalation", "Wrong Department"],
+        "per_queue": {
+          "exampleQueueSid": {
+            "require_disposition": true,
+            "dispositions": ["Promotional Sale", "Renewal"]
+          }
+        }
+      },
+      "emoji_picker": {
+        "enabled": true
+      },
+      "attribute_viewer": {
+        "enabled": true,
+        "enabled_for_agents": false
+      },
+      "admin_ui": {
+        "enabled": true
+      },
+      "localization": {
+        "enabled": false,
+        "show_menu": true
+      },
+      "park_interaction": {
+        "enabled": true,
+        "show_list": false
+      },
+      "teams_view_enhancements": {
+        "enabled": true,
+        "channels": {
+          "Voice": {
+            "color": "#ADD8E6",
+            "taskCount": true
+          },
+          "Chat": {
+            "color": "#87CEFA",
+            "taskCount": true
+          },
+          "SMS": {
+            "color": "#59cef8",
+            "taskCount": true
+          },
+          "Video": {
+            "color": "#00CED1",
+            "taskCount": false
+          }
+        },
+        "task_summary": false,
+        "team_activity": false,
+        "idle_status_color": "limegreen",
+        "busy_status_color": "royalblue",
+        "highlight_handle_time": true,
+        "handle_time_warning_threshold": 180,
+        "handle_time_exceeded_threshold": 300,
+        "display_task_queue_name": true,
+        "columns": {
+          "team": true,
+          "department": false,
+          "location": false,
+          "agent_skills": true
+        }
+      },
+      "send_audio_rec_file": {
+        "enabled": true
+      },
+      "queues_view_data_tiles": {
+        "enabled": false,
+        "activeTasksDataTile": false,
+        "waitingTasksDataTile": false,
+        "longestWaitTimeDataTile": false,
+        "agentsByActivityBarChart": true,
+        "channels": {
+          "voice": {
+            "color": "#ADD8E6",
+            "SLADataTile": true,
+            "taskCountsDataTile": true
+          },
+          "chat": {
+            "color": "#87CEFA",
+            "SLADataTile": false,
+            "taskCountsDataTile": false
+          },
+          "sms": {
+            "color": "#59cef8",
+            "SLADataTile": true,
+            "taskCountsDataTile": true
+          },
+          "video": {
+            "color": "#00CED1",
+            "SLADataTile": false,
+            "taskCountsDataTile": false
+          }
+        },
+        "allChannelsDataTile": false,
+        "enhancedAgentByActivityPieChart": false,
+        "agentActivityConfiguration": {
+          "activities": {
+            "Available": {
+              "color": "green",
+              "icon": "Accept"
+            },
+            "Outbound": {
+              "color": "darkgreen",
+              "icon": "Call"
+            },
+            "Break": {
+              "color": "goldenrod",
+              "icon": "Hold"
+            },
+            "Lunch": {
+              "color": "darkorange",
+              "icon": "Hamburger"
+            },
+            "Training": {
+              "color": "red",
+              "icon": "Bulb"
+            },
+            "Offline": {
+              "color": "grey",
+              "icon": "Minus"
+            }
+          },
+          "other": {
+            "color": "darkred",
+            "icon": "More"
+          }
+        },
+        "queuesStatsColumns": {
+          "assignedTasksColumn": true,
+          "wrappingTasksColumn": true
+        }
+      },
+      "sip_support": {
+        "enabled": false
+      },
+      "datadog_log_integration": {
+        "enabled": false,
+        "log_level": "info",
+        "api_key": "",
+        "intake_region": "",
+        "flush_timeout": 5000
+      }
+    }
+  }
+}

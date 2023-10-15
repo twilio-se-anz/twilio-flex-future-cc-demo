@@ -1,0 +1,17 @@
+{
+  "name": "flex-configuration",
+  "version": "1.0.0",
+  "description": "CLI tool for merging new data into Flex configuration",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "lodash": "^4.17.21"
+  }
+}
