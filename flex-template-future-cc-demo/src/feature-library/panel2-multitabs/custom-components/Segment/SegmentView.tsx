@@ -49,7 +49,7 @@ const SegmentView = (props: SegmentViewProps) => {
   return (
     <Box as="main" padding="space70">
       <Grid gutter="space30">
-        <Column span={4}>
+        <Column span={6}>
           <Stack orientation={'vertical'} spacing="space50">
             {/* <CustomerInfo /> */}
 
@@ -73,7 +73,7 @@ const SegmentView = (props: SegmentViewProps) => {
           </Stack>
         </Column>
 
-        <Column span={4}>
+        <Column span={6}>
           <Stack orientation={'vertical'} spacing="space50">
             <Card padding="space70">
               <Heading as={'h2'} variant={'heading40'}>
@@ -86,16 +86,6 @@ const SegmentView = (props: SegmentViewProps) => {
                 Proactive Knowledge
               </Heading>
               <FauxSuggestions />
-            </Card>
-          </Stack>
-        </Column>
-
-        <Column span={4}>
-          <Stack orientation={'vertical'} spacing="space50">
-            <Card padding="space70">
-              <Heading as={'h2'} variant={'heading40'}>
-                CDP Event Timeline
-              </Heading>
             </Card>
           </Stack>
         </Column>
