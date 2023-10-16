@@ -14,7 +14,7 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
     });
 
     response.setStatusCode(200);
-    response.setBody({ result: completion.data });
+    response.setBody({ result: completion });
 
     return callback(null, response);
   } catch (error) {
