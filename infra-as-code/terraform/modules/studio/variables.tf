@@ -56,8 +56,8 @@ variable "serverless_domain" {
   type        = string
   description = "serverless domain for flex plugin"
   validation {
-    condition     = length(var.serverless_domain) > 34 && substr(var.serverless_domain, 0, 34) == "custom-flex-extensions-serverless-"
-    error_message = "serverless_domain expected to start with \"custom-flex-extensions-serverless-\"."
+    condition     = length(var.serverless_domain) > 23 && substr(var.serverless_domain, 0, 23) == "serverless-test-rename-"
+    error_message = "serverless_domain expected to start with \"serverless-test-rename-\"."
   }
 }
 
@@ -78,3 +78,4 @@ variable "serverless_env_sid" {
     error_message = "serverless_env_sid expected to start with \"ZE\"."
   }
 }
+
