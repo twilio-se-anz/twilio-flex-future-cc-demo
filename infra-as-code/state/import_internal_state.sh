@@ -79,9 +79,10 @@ importInternalState() {
 
 }
 
+
 services=$(twilio api:serverless:v1:services:list --no-limit -o json)
 
-TF_VAR_SERVERLESS_SID=$(get_value_from_json "$services" "uniqueName" "serverless-test-rename" "sid")
+TF_VAR_SERVERLESS_SID=$(get_value_from_json "$services" "uniqueName" "serverless-future-cc-demo" "sid")
 TF_VAR_SCHEDULE_MANAGER_SID=$(get_value_from_json "$services" "uniqueName" "schedule-manager" "sid")
 
 serverless=$(twilio api:serverless:v1:services:environments:list --service-sid "$TF_VAR_SERVERLESS_SID" --no-limit -o json)

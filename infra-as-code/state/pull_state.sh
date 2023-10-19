@@ -6,6 +6,7 @@ echo "### Job Results "
 
 IFS="|" read -ra tf_state_files <<<"$TF_STATE_FILES"
 
+# Change "tfstate" to a pseudo variable so that it will never be found and new TF will always be pushed
 tfstate_bucket=$(twilio api:serverless:v1:services:fetch --sid tfstate -o json | jq -c '.[].domainBase // empty' | sed 's/"//g')
 
 if [ -n "$tfstate_bucket" ]; then

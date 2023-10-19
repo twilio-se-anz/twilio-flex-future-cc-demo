@@ -28,8 +28,8 @@ variable "SERVERLESS_DOMAIN" {
   type        = string
   description = "serverless domain"
   validation {
-    condition     = length(var.SERVERLESS_DOMAIN) > 23 && substr(var.SERVERLESS_DOMAIN, 0, 23) == "serverless-test-rename-"
-    error_message = "SERVERLESS_DOMAIN expected to start with \"serverless-test-rename-\"."
+    condition     = length(var.SERVERLESS_DOMAIN) > 26 && substr(var.SERVERLESS_DOMAIN, 0, 26) == "serverless-future-cc-demo-"
+    error_message = "SERVERLESS_DOMAIN expected to start with \"serverless-future-cc-demo-\"."
   }
 }
 

@@ -56,8 +56,8 @@ variable "serverless_domain" {
   type        = string
   description = "serverless domain for flex plugin"
   validation {
-    condition     = length(var.serverless_domain) > 23 && substr(var.serverless_domain, 0, 23) == "serverless-test-rename-"
-    error_message = "serverless_domain expected to start with \"serverless-test-rename-\"."
+    condition     = length(var.serverless_domain) > 26 && substr(var.serverless_domain, 0, 26) == "serverless-future-cc-demo-"
+    error_message = "serverless_domain expected to start with \"serverless-future-cc-demo-\"."
   }
 }
 
