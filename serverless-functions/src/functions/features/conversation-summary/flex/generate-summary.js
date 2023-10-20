@@ -33,12 +33,6 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
         content: `In 90 words or less, provide a summarization in ${language} of the following transcript: ${messages} without including the messages`,
       },
     ];
-    // const result = await openai.createChatCompletion({
-    //   model: 'gpt-4',
-    //   messages: prompt,
-    //   max_tokens: 134,
-    //   temperature: 0.2,
-    // });
 
     const openai = new OpenAI({
       apiKey: context.OPENAI_API_KEY,
