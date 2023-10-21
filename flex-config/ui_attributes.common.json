@@ -17,6 +17,9 @@
       },
       "ai_responses": {
         "enabled": true
+      },
+      "video_invite_card": {
+        "enabled": true
       }
     }
   }

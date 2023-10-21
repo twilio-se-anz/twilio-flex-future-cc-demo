@@ -35,11 +35,11 @@ const EngagementMetrics = ({ traits, loading }: EngagementMetricsProps) => {
   return (
     <>
       <Box>
-        <Typography component="legend">Digital Engagment</Typography>
+        <Typography component="legend">Digital Engagement</Typography>
         <Progress value={digitalEngagementRating * 100} />
       </Box>
       <Box>
-        <Typography component="legend">Marketing Engagment</Typography>
+        <Typography component="legend">Marketing Engagement</Typography>
         <Progress value={marketingEngagementRating * 100} />
       </Box>
     </>
