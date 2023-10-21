@@ -72,9 +72,9 @@ importInternalState() {
 	echo "   - :white_check_mark: Task Router - Activities" >>$GITHUB_STEP_SUMMARY
 
 	flows=$(twilio api:studio:v2:flows:list --no-limit -o json)
-	import_resource "$flows" "Voice IVR" "module.studio.twilio_studio_flows_v2.voice" "friendlyName" false
-	import_resource "$flows" "Messaging Flow" "module.studio.twilio_studio_flows_v2.messaging" "friendlyName" false
+# START FEATURE: web-app-examples/twilio-future-cc-widget
 	import_resource "$flows" "Chat Flow" "module.studio.twilio_studio_flows_v2.chat" "friendlyName" false
+# END FEATURE: web-app-examples/twilio-future-cc-widget	
 	echo "   - :white_check_mark: Studio - Flows" >>$GITHUB_STEP_SUMMARY
 
 }
