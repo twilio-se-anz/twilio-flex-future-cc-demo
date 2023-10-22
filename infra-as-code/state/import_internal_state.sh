@@ -42,16 +42,10 @@ importInternalState() {
 
 	workflows=$(twilio api:taskrouter:v1:workspaces:workflows:list --workspace-sid "$TF_WORKSPACE_SID" --no-limit -o json | jq 'map(del(.configuration))')
 	import_resource "$workflows" "Assign to Anyone" "module.taskrouter.twilio_taskrouter_workspaces_workflows_v1.assign_to_anyone" "friendlyName"
-	import_resource "$workflows" "Chat Transfer" "module.taskrouter.twilio_taskrouter_workspaces_workflows_v1.chat_transfer" "friendlyName"
-	import_resource "$workflows" "Callback" "module.taskrouter.twilio_taskrouter_workspaces_workflows_v1.callback" "friendlyName"
-	import_resource "$workflows" "Internal Call" "module.taskrouter.twilio_taskrouter_workspaces_workflows_v1.internal_call" "friendlyName"
 	echo "   - :white_check_mark: Task Router - Workflows" >>$GITHUB_STEP_SUMMARY
 
 	queues=$(twilio api:taskrouter:v1:workspaces:task-queues:list --workspace-sid "$TF_WORKSPACE_SID" --no-limit -o json)
 	import_resource "$queues" "Everyone" "module.taskrouter.twilio_taskrouter_workspaces_task_queues_v1.everyone" "friendlyName"
-	import_resource "$queues" "Template Example Sales" "module.taskrouter.twilio_taskrouter_workspaces_task_queues_v1.template_example_sales" "friendlyName"
-	import_resource "$queues" "Template Example Support" "module.taskrouter.twilio_taskrouter_workspaces_task_queues_v1.template_example_support" "friendlyName"
-	import_resource "$queues" "Internal Calls" "module.taskrouter.twilio_taskrouter_workspaces_task_queues_v1.internal_calls" "friendlyName"
 	echo "   - :white_check_mark: Task Router - Queues" >>$GITHUB_STEP_SUMMARY
 
 	channels=$(twilio api:taskrouter:v1:workspaces:task-channels:list --workspace-sid "$TF_WORKSPACE_SID" --no-limit -o json)
@@ -64,11 +58,6 @@ importInternalState() {
 	import_resource "$activities" "Available" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.available" "friendlyName"
 	import_resource "$activities" "Unavailable" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.unavailable" "friendlyName"
 	import_resource "$activities" "Break" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.break" "friendlyName"
-
-	import_resource "$activities" "On a Task" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.on_a_task" "friendlyName"
-	import_resource "$activities" "On a Task, No ACD" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.on_a_task_no_acd" "friendlyName"
-	import_resource "$activities" "Wrap Up" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.wrap_up" "friendlyName"
-	import_resource "$activities" "Wrap Up, No ACD" "module.taskrouter.twilio_taskrouter_workspaces_activities_v1.wrap_up_no_acd" "friendlyName"
 	echo "   - :white_check_mark: Task Router - Activities" >>$GITHUB_STEP_SUMMARY
 
 	flows=$(twilio api:studio:v2:flows:list --no-limit -o json)
@@ -83,24 +72,14 @@ importInternalState() {
 services=$(twilio api:serverless:v1:services:list --no-limit -o json)
 
 TF_VAR_SERVERLESS_SID=$(get_value_from_json "$services" "uniqueName" "serverless-future-cc-demo" "sid")
-TF_VAR_SCHEDULE_MANAGER_SID=$(get_value_from_json "$services" "uniqueName" "schedule-manager" "sid")
 
 serverless=$(twilio api:serverless:v1:services:environments:list --service-sid "$TF_VAR_SERVERLESS_SID" --no-limit -o json)
 
 TF_VAR_SERVERLESS_DOMAIN=$(get_value_from_json "$serverless" "uniqueName" "dev-environment" "domainName")
 TF_VAR_SERVERLESS_ENV_SID=$(get_value_from_json "$serverless" "uniqueName" "dev-environment" "sid")
 
-TF_VAR_SCHEDULE_MANAGER_DOMAIN=$(get_value_from_json "$schedule_manager" "uniqueName" "dev-environment" "domainName")
-TF_VAR_SCHEDULE_MANAGER_ENV_SID=$(get_value_from_json "$schedule_manager" "uniqueName" "dev-environment" "sid")
-
 ### Functions
 serverless_functions=$(twilio api:serverless:v1:services:functions:list --service-sid "$TF_VAR_SERVERLESS_SID" --no-limit -o json)
-
-### SERVERLESS FUNCTIONS
-TF_VAR_FUNCTION_CREATE_CALLBACK=$(get_value_from_json "$serverless_functions" "friendlyName" "/features/callback-and-voicemail/studio/create-callback" "sid")
-
-### SCHEDULE MANAGER FUNCTIONS
-TF_VAR_FUNCTION_CHECK_SCHEDULE_SID=$(get_value_from_json "$schedule_manager_functions" "friendlyName" "/check-schedule" "sid")
 
 echo " - *Discovering Serverless Backends* " >>$GITHUB_STEP_SUMMARY
 
@@ -110,13 +89,7 @@ else
 	echo "   - :x: serverless backend not found" >>$GITHUB_STEP_SUMMARY
 fi
 
-if [ -n "$TF_VAR_SCHEDULE_MANAGER_DOMAIN" ]; then
-	echo "   - :white_check_mark: schedule manager backend: $TF_VAR_SCHEDULE_MANAGER_DOMAIN" >>$GITHUB_STEP_SUMMARY
-else
-	echo "   - :x: schedule manager backend not found" >>$GITHUB_STEP_SUMMARY
-fi
-
-export TF_VAR_SERVERLESS_SID TF_VAR_SCHEDULE_MANAGER_SID TF_VAR_SERVERLESS_DOMAIN TF_VAR_SERVERLESS_ENV_SID TF_VAR_SCHEDULE_MANAGER_DOMAIN TF_VAR_SCHEDULE_MANAGER_ENV_SID TF_VAR_FUNCTION_CREATE_CALLBACK TF_VAR_FUNCTION_CHECK_SCHEDULE_SID
+export TF_VAR_SERVERLESS_SID TF_VAR_SERVERLESS_DOMAIN TF_VAR_SERVERLESS_ENV_SID
 
 
 ### only if existing state file does not exist
