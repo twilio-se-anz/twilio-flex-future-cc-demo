@@ -1,0 +1,32 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "fallbackText": "This card requires Media to be viewed. Ask your platform to update to Adaptive Cards v1.6 for this and more!",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Activate your card",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "text": "New card. No worries. You can activate eligible ANZ cards in the ANZ App and ANZ Internet Banking. You can set the PIN for your new card in the app too. That’s handy.",
+      "wrap": true
+    },
+    {
+      "type": "Image",
+      "url": "https://www.anz.com.au/content/dam/anzcomau/illustration/business/accounts/business-advantage.svg",
+      "horizontalAlignment": "Center"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Take me there",
+      "style": "positive",
+      "url": "https://www.anz.com.au/support/manage-your-card/"
+    }
+  ]
+}

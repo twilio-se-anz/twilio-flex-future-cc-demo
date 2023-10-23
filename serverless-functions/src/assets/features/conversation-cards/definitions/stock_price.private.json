@@ -1,0 +1,85 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "speak": "Microsoft stock is trading at $62.30 a share, which is down .32%",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Twilio",
+          "size": "Medium",
+          "wrap": true,
+          "style": "heading"
+        },
+        {
+          "type": "TextBlock",
+          "text": "NYSE: TWLO",
+          "isSubtle": true,
+          "spacing": "None",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Fri, May 3, 2024 1:00 PM",
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "spacing": "None",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "121.30",
+                  "size": "ExtraLarge",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "▲ 12.69 USD (2.13%)",
+                  "color": "Good",
+                  "spacing": "None",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "FactSet",
+                  "facts": [
+                    {
+                      "title": "Open",
+                      "value": "119.42"
+                    },
+                    {
+                      "title": "High",
+                      "value": "129.43"
+                    },
+                    {
+                      "title": "Low",
+                      "value": "107.25"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Implement Adaptive Cards for Flex",
+      "weight": "bolder",
+      "size": "medium",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://media.licdn.com/dms/image/C5603AQEeUNwpxs90ZA/profile-displayphoto-shrink_400_400/0/1516270919592?e=1692835200&v=beta&t=JCRADHLZUkopDuFa9JPXOV-3rIks-xUKCPAVVtCyweg",
+              "altText": "Christopher Connolly",
+              "size": "small",
+              "style": "person"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Christopher Connolly",
+              "weight": "bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "none",
+              "text": "Created {{DATE(2023-06-24T06:08:39Z, SHORT)}}",
+              "isSubtle": true,
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Now that we have added support for adaptive cards in the bot framework, we should add support for it in the Flex UI.",
+      "wrap": true
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Board:",
+          "value": "Adaptive Card"
+        },
+        {
+          "title": "List:",
+          "value": "Backlog"
+        },
+        {
+          "title": "Assigned to:",
+          "value": "Jason Learmouth"
+        },
+        {
+          "title": "Due date:",
+          "value": "Not set"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ShowCard",
+      "title": "Set due date",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Date",
+            "label": "Enter the due date",
+            "id": "dueDate"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "Send"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Action.ShowCard",
+      "title": "Comment",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [
+          {
+            "type": "Input.Text",
+            "id": "comment",
+            "isMultiline": true,
+            "label": "Add a comment"
+          }
+        ],
+        "actions": [
+          {
+            "type": "Action.Submit",
+            "title": "OK"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "SERVERLESS_DOMAIN": {
     "type": "serverless-domain",
-    "name": "custom-flex-extensions-serverless"
+    "name": "serverless-future-cc-demo"
   },
   "SCHEDULE_MANAGER_DOMAIN": {
     "type": "serverless-domain",
@@ -9,7 +9,7 @@
   },
   "VIDEO_SERVERLESS_DOMAIN": {
     "type": "serverless-domain",
-    "name": "custom-flex-extensions-serverless",
+    "name": "serverless-future-cc-demo",
     "localValue": "localhost:3001"
   },
   "TWILIO_FLEX_WORKSPACE_SID": {
@@ -36,5 +36,10 @@
   "TWILIO_FLEX_INTERNAL_CALL_WORKFLOW_SID": {
     "type": "tr-workflow",
     "name": "Internal Call"
+  },
+  "TWILIO_FLEX_WEBCHAT_ADDRESS_SID": {
+    "type": "conversations-address",
+    "name": "Flex Chat",
+    "fallback": "Chat"
   }
 }

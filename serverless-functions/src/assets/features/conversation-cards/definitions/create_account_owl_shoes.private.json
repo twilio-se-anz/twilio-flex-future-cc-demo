@@ -1,0 +1,86 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 2,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Tell us about yourself",
+              "weight": "Bolder",
+              "size": "Medium",
+              "wrap": true,
+              "style": "heading"
+            },
+            {
+              "type": "TextBlock",
+              "text": "We just need a few more details to get you signed up for a new account",
+              "isSubtle": true,
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Don't worry, we'll never share or sell your information.",
+              "isSubtle": true,
+              "wrap": true,
+              "size": "Small"
+            },
+            {
+              "type": "Input.Text",
+              "id": "myName",
+              "label": "Your name (Last, First)",
+              "isRequired": true,
+              "regex": "^[A-Z][a-z]+, [A-Z][a-z]+$",
+              "errorMessage": "Please enter your name in the specified format"
+            },
+            {
+              "type": "Input.Text",
+              "id": "myEmail",
+              "label": "Your email",
+              "regex": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.][A-Za-z0-9-]{2,4}$",
+              "isRequired": true,
+              "errorMessage": "Please enter a valid email address",
+              "style": "Email"
+            },
+            {
+              "type": "Input.Text",
+              "id": "myTel",
+              "label": "Phone Number (xxx xxx xxxx)",
+              "regex": "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$",
+              "errorMessage": "Invalid phone number. Please enter a 10 digit phone number",
+              "style": "Tel"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": 1,
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://shoes.twiliodemo.com/assets/images/owl-shoes-logo-darkgrey.png",
+              "altText": "Owl Shoes"
+            },
+            {
+              "type": "Image",
+              "url": "https://shoes.twiliodemo.com/assets/images/retail/dress_shoe_2a.png"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit",
+      "style": "positive"
+    }
+  ]
+}

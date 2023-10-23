@@ -1,0 +1,107 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "$7,000 New Limit",
+              "weight": "Bolder",
+              "size": "ExtraLarge",
+              "spacing": "None",
+              "wrap": true,
+              "style": "heading"
+            }
+          ],
+          "horizontalAlignment": "Center",
+          "verticalContentAlignment": "Center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Image",
+              "url": "https://www.anz.com.au/content/dam/anzcomau/images/credit-cards/KSQ/CC_Platinum.png",
+              "altText": "ANZ Credit Card"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": 2,
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Yes! Please upgrade my ANZ Platinum credit card from it's existing limit of $4,900 to $7,000",
+              "size": "Small",
+              "wrap": true,
+              "maxLines": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "ActionSet",
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Yes, Confirm",
+                  "style": "positive",
+                  "id": "cardOffer",
+                  "data": {
+                    "text": "Accept"
+                  }
+                }
+              ],
+              "id": "cardOfferAccept"
+            }
+          ],
+          "horizontalAlignment": "Center",
+          "verticalContentAlignment": "Center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "ActionSet",
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "No thanks",
+                  "data": {
+                    "text": "Decline"
+                  }
+                }
+              ],
+              "id": "cardOfferReject"
+            }
+          ],
+          "horizontalAlignment": "Center",
+          "verticalContentAlignment": "Center"
+        }
+      ]
+    }
+  ]
+}
