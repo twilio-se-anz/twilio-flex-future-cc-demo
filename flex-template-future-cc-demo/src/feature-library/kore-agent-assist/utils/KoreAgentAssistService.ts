@@ -5,15 +5,17 @@ import { KoreTokenResponse } from '../types/KoreTokenResponse';
 class KoreAgentAssistService extends ApiService {
   getToken = async (): Promise<KoreTokenResponse> => {
     return new Promise((resolve, reject) => {
+      const manager = Flex.Manager.getInstance();
+
+      const params = {
+        Token: manager.user.token,
+      };
       this.fetchJsonWithReject<KoreTokenResponse>(
-        `${this.serverlessProtocol}://${
-          this.serverlessDomain
-        }/features/kore-agent-assist/get-token?Token=${
-          Flex.Manager.getInstance().user.token
-        }`,
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/kore-agent-assist/get-token`,
         {
-          method: 'GET',
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(params),
         }
       )
         .then((response) => {
