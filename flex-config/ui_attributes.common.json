@@ -21,6 +21,9 @@
       },
       "video_invite_card": {
         "enabled": true
+      },
+      "kore_agent_assist": {
+        "enabled": false
       }
     }
   }
