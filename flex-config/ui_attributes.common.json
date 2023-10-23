@@ -13,7 +13,8 @@
         "enabled": true
       },
       "panel2_multitabs": {
-        "enabled": true
+        "enabled": true,
+        "useEnhancedCrmContainerTabs": false
       },
       "ai_responses": {
         "enabled": true
