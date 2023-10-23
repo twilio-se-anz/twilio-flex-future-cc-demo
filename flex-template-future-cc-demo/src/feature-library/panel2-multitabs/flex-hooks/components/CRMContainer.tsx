@@ -2,9 +2,15 @@ import * as Flex from '@twilio/flex-ui';
 
 import { Panel2Tabs, Panel2VoiceTabs } from '../../custom-components/Panel2Tabs';
 import { FlexComponent } from '../../../../types/feature-loader';
+import { createEnhancedCrmContainerTabs } from '../../config';
 
 export const componentName = FlexComponent.CRMContainer;
 export const componentHook = function addTabsCRMContainer(flex: typeof Flex, _manager: Flex.Manager) {
+  // This hook replaced Panel2, we should not load if CRM Container tabs are enabled.
+  if (createEnhancedCrmContainerTabs()) {
+    return;
+  }
+
   const options: Flex.ContentFragmentProps = {
     if: (props: any) => {
       // In the TaskCanvas, we have access to the task directly.
@@ -23,6 +29,8 @@ export const componentHook = function addTabsCRMContainer(flex: typeof Flex, _ma
   };
 
   flex.CRMContainer.Content.replace(<Panel2Tabs key="crm-container-tabs" />, options);
+
+  // Voice Tasks
   const voice_tab_options: Flex.ContentFragmentProps = {
     if: (props: any) => {
       // In the TaskCanvas, we have access to the task directly.
