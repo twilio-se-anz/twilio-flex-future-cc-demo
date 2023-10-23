@@ -24,18 +24,18 @@ const SegmentView = (props: SegmentViewProps) => {
     setLoadingEvents(true);
 
     SegmentService.fetchTraitsForUser(
-      props.task.attributes.email ||
-        props.task.attributes?.customers?.email ||
-        props.task.attributes?.pre_engagement_data?.email,
+      props.task?.attributes.email ||
+      props.task?.attributes?.customers?.email ||
+      props.task?.attributes?.pre_engagement_data?.email,
     )
       .then((userTraits) => setTraits(userTraits))
       .catch((err) => console.error('Segment view - Error fetching user traits', err))
       .finally(() => setLoadingTraits(false));
 
     SegmentService.fetchEventsForUser(
-      props.task.attributes.email ||
-        props.task.attributes?.customers?.email ||
-        props.task.attributes?.pre_engagement_data?.email,
+      props.task?.attributes.email ||
+      props.task?.attributes?.customers?.email ||
+      props.task?.attributes?.pre_engagement_data?.email,
     )
       .then((events) => setEvents(events))
       .catch((err) => console.log('Segment view - Error getting events', err))
@@ -43,7 +43,7 @@ const SegmentView = (props: SegmentViewProps) => {
   }, [
     props.task?.attributes?.email,
     props.task?.attributes?.customers?.email,
-    props.task.attributes?.pre_engagement_data?.email,
+    props.task?.attributes?.pre_engagement_data?.email,
   ]);
 
   return (

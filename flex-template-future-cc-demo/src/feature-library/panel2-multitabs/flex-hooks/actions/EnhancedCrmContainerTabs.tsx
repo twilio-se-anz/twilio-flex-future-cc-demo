@@ -16,6 +16,7 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
     if (!createEnhancedCrmContainerTabs() && !payload.task) {
       return;
     }
+    console.log('payload', payload);
 
     // Append with our component definition
     payload.components = [
@@ -27,7 +28,7 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
       },
     ];
 
-    if (Flex.TaskHelper.isChatBasedTask(payload.task)) {
+    if (payload.task && Flex.TaskHelper.isChatBasedTask(payload.task) && !Flex.TaskHelper.isInWrapupMode(payload.task)) {
       payload.components = [
         ...payload.components,
         {
@@ -38,7 +39,7 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
       ]
     }
 
-    if (!Flex.TaskHelper.isChatBasedTask(payload.task)) {
+    if (!Flex.TaskHelper.isChatBasedTask(payload.task) && !Flex.TaskHelper.isInWrapupMode(payload.task)) {
       payload.components = [
         ...payload.components,
         {
