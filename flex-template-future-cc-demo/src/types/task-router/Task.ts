@@ -3,7 +3,13 @@ import OutgoingTransfer from './OutgoingTransfer';
 
 // https://twilio.github.io/twilio-taskrouter.js/Task.html
 
-export type TaskAssignmentStatus = 'reserved' | 'assigned' | 'canceled' | 'wrapping' | 'completed' | 'transferring';
+export type TaskAssignmentStatus =
+  | 'reserved'
+  | 'assigned'
+  | 'canceled'
+  | 'wrapping'
+  | 'completed'
+  | 'transferring';
 
 export default interface Task {
   addOns: any;
@@ -112,6 +118,7 @@ export interface TaskAttributes {
     participants: { [participantType: string]: string };
     friendlyName: string;
   };
+  conversationSid?: string;
   direction?: string;
   from: string;
   from_city: string;
