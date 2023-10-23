@@ -25,16 +25,28 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
         order: 0, // optionally define preferred tab order, defaults to 999 if not present
         component: <SegmentView key="segment-tab" />,
       },
-      {
-        title: 'Cards',
-        order: 1, // optionally define preferred tab order, defaults to 999 if not present
-        component: <ConversationCardsCRM key="conversation-cards-tab" />,
-      },
-      {
-        title: 'Profile',
-        order: 2, // optionally define preferred tab order, defaults to 999 if not present
-        component: <FauxCustomerProfile key="faux-profile-tab" />,
-      },
     ];
+
+    if (Flex.TaskHelper.isChatBasedTask(payload.task)) {
+      payload.components = [
+        ...payload.components,
+        {
+          title: 'Cards',
+          order: 1, // optionally define preferred tab order, defaults to 999 if not present
+          component: <ConversationCardsCRM key="conversation-cards-tab" />,
+        },
+      ]
+    }
+
+    if (!Flex.TaskHelper.isChatBasedTask(payload.task)) {
+      payload.components = [
+        ...payload.components,
+        {
+          title: 'Profile',
+          order: 2, // optionally define preferred tab order, defaults to 999 if not present
+          component: <FauxCustomerProfile key="faux-profile-tab" />,
+        },
+      ]
+    }
   });
 };
