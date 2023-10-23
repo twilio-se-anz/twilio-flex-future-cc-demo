@@ -1,0 +1,52 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "I need more help",
+          "data": {
+            "text": "I need more help"
+          },
+          "style": "positive"
+        }
+      ],
+      "horizontalAlignment": "Center",
+      "spacing": "None"
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Dispute transaction",
+          "data": {
+            "text": "Dispute transaction"
+          }
+        }
+      ],
+      "horizontalAlignment": "Center"
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Talk to an agent",
+          "data": {
+            "text": "Talk to an agent"
+          }
+        }
+      ],
+      "horizontalAlignment": "Center"
+    }
+  ],
+  "verticalContentAlignment": "Center",
+  "selectAction": {
+    "type": "Action.Submit"
+  }
+}

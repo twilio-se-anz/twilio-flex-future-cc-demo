@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.js": "./static/js/main.js",
+    "main.css": "./static/css/main.ac7b0b12.css",
+    "tsub-middleware.js": "./static/js/tsub-middleware.js",
+    "ajs-destination.js": "./static/js/ajs-destination.js",
+    "legacyVideos.js": "./static/js/legacyVideos.js",
+    "schemaFilter.js": "./static/js/schemaFilter.js",
+    "remoteMiddleware.js": "./static/js/remoteMiddleware.js",
+    "auto-track.js": "./static/js/auto-track.js",
+    "queryString.js": "./static/js/queryString.js",
+    "static/js/74.js": "./static/js/74.js",
+    "index.html": "./index.html",
+    "main.js.map": "./static/js/main.js.map",
+    "main.ac7b0b12.css.map": "./static/css/main.ac7b0b12.css.map",
+    "tsub-middleware.js.map": "./static/js/tsub-middleware.js.map",
+    "ajs-destination.js.map": "./static/js/ajs-destination.js.map",
+    "legacyVideos.js.map": "./static/js/legacyVideos.js.map",
+    "schemaFilter.js.map": "./static/js/schemaFilter.js.map",
+    "remoteMiddleware.js.map": "./static/js/remoteMiddleware.js.map",
+    "auto-track.js.map": "./static/js/auto-track.js.map",
+    "queryString.js.map": "./static/js/queryString.js.map",
+    "74.js.map": "./static/js/74.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.js",
+    "static/css/main.ac7b0b12.css"
+  ]
+}

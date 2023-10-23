@@ -68,7 +68,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
       - name: set github environment variables
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -118,7 +118,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
       - name: set github environment variables
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -131,13 +131,33 @@ jobs:
           echo " - Environment: ${{ env.ENVIRONMENT }}"  >> $GITHUB_STEP_SUMMARY
           echo "### Configuration output"  >> $GITHUB_STEP_SUMMARY
           npm install --ignore-scripts
+          echo "Completed npm install --ignore-scripts..."
           npm run postinstall -- --packages=serverless-functions >> $GITHUB_STEP_SUMMARY
+          echo "Completed npm run postinstall...."
+      # FEATURE: twilio-future-cc-widget
+      - name: install npm and build twilio-future-cc-widget
+        run: |
+          echo "### twilio-future-cc-widget configuration output"  >> $GITHUB_STEP_SUMMARY
+          ls -al web-app-examples/twilio-future-cc-widget
+          npm run postinstall -- --packages=web-app-examples/twilio-future-cc-widget
+          ls -al web-app-examples/twilio-future-cc-widget
+          ls -al web-app-examples/twilio-future-cc-widget/build
+      # END FEATURE: twilio-future-cc-widget
+      # FEATURE: chat-to-video-escalation
+      - name: install npm and build video-app-assets
+        run: |
+          echo "### chat-to-video-escalation configuration output"  >> $GITHUB_STEP_SUMMARY
+          npm run postinstall -- --packages=web-app-examples/twilio-video-demo-app >> $GITHUB_STEP_SUMMARY
+      # END FEATURE: chat-to-video-escalation
       - name: deploy serverless
         working-directory: serverless-functions
         run: |
+          ls -al src
+          ls -al src/assets
+          ls -al src/assets/features
+          ls -al src/assets/features/future-cc
           npm run install-serverless-plugin
           npm run deploy-env
-
 
   deploy-flex-config:
     if: |
@@ -156,7 +176,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
       - name: set github environment variables
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -189,7 +209,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: install twilio cli
         run: npm install --ignore-scripts
