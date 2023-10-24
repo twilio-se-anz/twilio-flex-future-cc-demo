@@ -16,7 +16,7 @@ exports.handler = prepareFlexFunction(
 
       const data = {
         iss: context.KORE_CLIENT_ID,
-        sub: event.identity,
+        sub: 'number',
         aud: context.KORE_AUD,
         botId: context.KORE_BOT_ID,
         isAnonymous: context.KORE_IS_ANONYMOUS,

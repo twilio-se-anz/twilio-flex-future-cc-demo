@@ -27,6 +27,41 @@ class KoreAgentAssistService extends ApiService {
         });
     });
   };
+
+  // sendMessage = async (
+  //   koreToken: string,
+  //   koreAgentAssistUrl: string,
+  //   koreBotId: string,
+  //   conversationSid: string,
+  //   agentId: string
+  // ): Promise<any> => {
+  //   return new Promise((resolve, reject) => {
+  //     const manager = Flex.Manager.getInstance();
+
+  //     const body = JSON.stringify({
+  //       agentId: `${agentId}` || '1000',
+  //       botId: `${process.env.botId}`,
+  //       conversationId: `${conversationSid}` || '1000',
+  //       query: `${query}` || 'connection',
+  //     });
+
+  //     this.fetchJsonWithReject<KoreTokenResponse>(
+  //       `${koreAgentAssistUrl}/agentassist/api/v1/hooks/${koreBotId}`,
+  //       {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json', 'token': koreToken },
+  //         body: JSON.stringify(body),
+  //       }
+  //     )
+  //       .then((response) => {
+  //         resolve(response);
+  //       })
+  //       .catch((error) => {
+  //         console.error(`Error fetching Kore AI Token\r\n`, error);
+  //         reject(error);
+  //       });
+  //   });
+  // };
 }
 
 export default new KoreAgentAssistService();
