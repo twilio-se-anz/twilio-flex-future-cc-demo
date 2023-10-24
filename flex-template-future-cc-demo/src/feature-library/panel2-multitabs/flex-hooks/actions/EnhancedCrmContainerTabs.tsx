@@ -16,17 +16,6 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
     if (!createEnhancedCrmContainerTabs() && !payload.task) {
       return;
     }
-    console.log('payload', payload);
-
-    // Append with our component definition
-    payload.components = [
-      ...payload.components,
-      {
-        title: 'Segment',
-        order: 0, // optionally define preferred tab order, defaults to 999 if not present
-        component: <SegmentView key="segment-tab" />,
-      },
-    ];
 
     if (payload.task && Flex.TaskHelper.isChatBasedTask(payload.task) && !Flex.TaskHelper.isInWrapupMode(payload.task)) {
       payload.components = [
@@ -35,6 +24,11 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
           title: 'Cards',
           order: 1, // optionally define preferred tab order, defaults to 999 if not present
           component: <ConversationCardsCRM key="conversation-cards-tab" />,
+        },
+        {
+          title: 'Segment',
+          order: 0, // optionally define preferred tab order, defaults to 999 if not present
+          component: <SegmentView key="segment-tab" />,
         },
       ]
     }
