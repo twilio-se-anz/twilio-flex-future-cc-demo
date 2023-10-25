@@ -6,20 +6,20 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Flex Project Template",
-  tagline: "Twilio Professional Services",
+  title: "Future CC Demo",
+  tagline: "Twilio Flex APJ SE",
   favicon: "img/logos/flex.png",
 
   // Set the production url of your site here
-  url: "https://twilio-professional-services.github.io",
+  url: "https://twilio-se-anz.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/flex-project-template/",
+  baseUrl: "/twilio-flex-future-cc-demo/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "twilio-professional-services", // Usually your GitHub org/user name.
-  projectName: "flex-project-template", // Usually your repo name.
+  organizationName: "https://twilio-se-anz", // Usually your GitHub org/user name.
+  projectName: "twilio-flex-future-cc-demo", // Usually your repo name.
   trailingSlash: false,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -66,11 +66,11 @@ const config = {
         language: "en",
       },
     ],
-    'docusaurus-plugin-sass'
+    "docusaurus-plugin-sass",
   ],
-  
+
   stylesheets: [
-    'https://assets.twilio.com/public_assets/paste-fonts/1.5.1/fonts.css',
+    "https://assets.twilio.com/public_assets/paste-fonts/1.5.1/fonts.css",
   ],
 
   themeConfig:
@@ -79,14 +79,14 @@ const config = {
       // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: "Flex Project Template",
+        title: "Future CC Demo",
         logo: {
           alt: "Twilio Flex Logo",
           src: "img/logos/flex.png",
         },
         items: [
           {
-            href: "https://github.com/twilio-professional-services/flex-project-template",
+            href: "https://github.com/twilio-se-anz/twilio-flex-future-cc-demo/",
             label: "GitHub",
             position: "right",
           },
@@ -113,7 +113,7 @@ const config = {
             items: [
               {
                 label: "GitHub",
-                href: "https://github.com/twilio-professional-services/flex-project-template",
+                href: "https://github.com/twilio-se-anz/twilio-flex-future-cc-demo/",
               },
             ],
           },
@@ -126,12 +126,12 @@ const config = {
       },
     }),
 
-  themes: ['@docusaurus/theme-mermaid'],
-    // In order for Mermaid code blocks in Markdown to work,
-    // you also need to enable the Remark plugin with this option
-    markdown: {
-      mermaid: true,
-    },
+  themes: ["@docusaurus/theme-mermaid"],
+  // In order for Mermaid code blocks in Markdown to work,
+  // you also need to enable the Remark plugin with this option
+  markdown: {
+    mermaid: true,
+  },
 };
 
 module.exports = config;
