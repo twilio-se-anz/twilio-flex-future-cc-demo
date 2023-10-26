@@ -2,30 +2,33 @@
 sidebar_label: Introduction
 sidebar_position: 0
 slug: /
-title: "Flex Project Template"
+title: "Future CC Demo"
 ---
 
-<img src="img/logos/flex-text-lightmode.png#gh-light-mode-only" width="275" alt="Twilio Flex" />
-<img src="img/logos/flex-text-darkmode.png#gh-dark-mode-only" width="275" alt="Twilio Flex" />
+<img src="img/hero/hero-banner.png"  alt="Future CC Demo" />
+&nbsp;
 
-The _Flex Project Template_ is a starting point for Flex solutions of any size. It provides a methodology for managing all the key assets of a Twilio Flex solution:
+The _Future CC Demo_ goes beyond conventional contact center solutions demo by enabling audience participation, fostering interactivity while capturing crucial real-time data. This unique feature sets it apart, making it a dynamic tool for engaging customers in meaningful ways.
 
-- It can be used for large projects or simple standalone features
-- Many of the most common features requested by Flex customers [are already packaged in the template](/feature-library/overview)
-- Each feature is self-contained and easily removed if desired  
-- Features can be turned on and off using an [adminstration panel](/feature-library/admin-ui)
-- You can [deploy this solution and use it to build in just a few minutes](/getting-started/install-template) by providing your account SID, API key, and API secret.
+From the agent's perspective, the demo incorporates cutting-edge Gen AI features, providing them with powerful tools to streamline interactions and deliver exceptional support. This combination of interactivity and advanced AI capabilities redefines the contact center experience for both customers and agents alike.
 
-## Why use this template?
+## Features Overview
 
-The Twilio platform is a robust suite of tools that can be orchestrated together to create incredible custom solutions. The biggest challenge is how to automatically configure and orchestrate these different tools together from an single source of truth. This is the problem the template aims to resolve.
+### Future CC Widget
 
-The template provides a means to manage all of the assets which make up a Flex solution. This aggregates the work _Twilio Professional Services_ have done to show how different features can be robustly implemented on the Flex platform. It can take new Flex developers from 0 to 100 by putting them right in the position of developing feature enhancements instead of worrying about how to manage assets and dependencies on the platform.
+- **Twilio Segment Integration for Customer Traits**: Favorite Color, Animal, and Destination
+- **E.164 Phone Number Validation**: Automatically validates and adds the country code based on the user's IP address
+- **Interactive Message Rendering**: Utilizes adaptivecards.io for dynamic and engaging message displays
 
-Furthermore, with the rich library of examples and conventions, developers can quickly see how to approach different problems on the platform by seeing working code that they can easily reverse engineer.
+### Twilio Flex Agent Interface
+
+- **Segment Profile**: Agents access customer traits via Twilio Segment.
+- **Dynamic Personalization**: AI Response integrates real-time data for tailored agent responses.
+- **Message Recommendation**: AI-powered suggestions for optimal responses.
+- **AI-Powered Conversation Summaries**: Utilizes AI to generate concise and informative summaries of ongoing conversations, streamlining agent workflows and ensuring no crucial details are overlooked.
+- **Conversation Cards**: Effortlessly drag-and-drop interactive messages into the chat panel. Supports seamless escalation to video.
+- **Interactive Message Rendering**: Dynamic and actionable message displays using adaptivecards.io.
 
 ## How do I get started?
 
 Installing the template in your Twilio account is fast and easy. [Follow this step-by-step guide to install the template](/getting-started/install-template) in under 10 minutes.
-
-When you are ready to customize and extend your Flex solution with the template, [get started building with the template](/building/getting-started)!

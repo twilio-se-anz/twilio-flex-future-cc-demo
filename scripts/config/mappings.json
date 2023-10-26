@@ -9,7 +9,7 @@
   },
   "VIDEO_SERVERLESS_DOMAIN": {
     "type": "serverless-domain",
-    "name": "custom-flex-extensions-serverless",
+    "name": "serverless-future-cc-demo",
     "localValue": "localhost:3001"
   },
   "TWILIO_FLEX_WORKSPACE_SID": {

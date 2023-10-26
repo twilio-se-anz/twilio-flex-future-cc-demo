@@ -72,7 +72,7 @@
           },
           "workflow": "${WORKFLOW_SID_ASSIGN_TO_ANYONE}",
           "channel": "${CHAT_CHANNEL_SID}",
-          "attributes": "{\"from\": \"{{trigger.conversation.ChannelAttributes.pre_engagement_data.friendlyName}}\"}"
+          "attributes": "{\"from\": \"{{trigger.conversation.ChannelAttributes.pre_engagement_data.friendlyName}}\",\"email\": \"{{trigger.conversation.ChannelAttributes.pre_engagement_data.email}}\"}"
         }
       }
     ],
