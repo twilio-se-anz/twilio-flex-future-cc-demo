@@ -35,7 +35,8 @@ const VoiceAssist: React.FC<AiSuggestionProps> = (props: AiSuggestionProps) => {
     setLoading(true);
     VoiceSuggestionsService.getSuggestions('en', props.transcript)
       .then((ai_suggestion) => {
-        if (ai_suggestion.success == true) setSuggestions(ai_suggestion.suggestions);
+        if (ai_suggestion.success == true && ai_suggestion.suggestions.length > 0)
+          setSuggestions(ai_suggestion.suggestions);
       })
       .catch((err) => console.warn('Error getting voice AI suggestion', err))
       .finally(() => setLoading(false));

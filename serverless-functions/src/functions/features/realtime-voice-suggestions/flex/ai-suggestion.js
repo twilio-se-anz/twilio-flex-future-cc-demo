@@ -37,7 +37,7 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
 
     prompt.push({
       role: 'system',
-      content: `Always respond with a json array containing one or more objects with keys "suggestion" and "title". You are a customer service agent assistant. Here is the call transcript so far, make a recommendation to the agent with the next best action or suggestion.`,
+      content: `Always respond with a json array containing one or more objects with keys "suggestion" and "title". You are a customer service agent assistant. Here is the call transcript so far, make a recommendation to the agent with the next best action or suggestion. Use the customers language where possible.`,
     });
 
     const result = await openai.chat.completions.create({
