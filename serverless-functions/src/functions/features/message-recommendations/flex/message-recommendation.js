@@ -1,4 +1,4 @@
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai');
 
 const { prepareFlexFunction, extractStandardResponse } = require(Runtime.getFunctions()[
   'common/helpers/function-helper'
@@ -16,15 +16,16 @@ const requiredParameters = [
 ];
 
 exports.handler = prepareFlexFunction(requiredParameters, async (context, event, callback, response, handleError) => {
-  const { OPENAI_KEY } = context;
   const { messages: stringMessages, language } = event;
   const messages = JSON.parse(stringMessages);
-  const configuration = new Configuration({ apiKey: OPENAI_KEY });
-  const openai = new OpenAIApi(configuration);
 
   if (!language || !messages) {
     throw new Error('Missing LANGUAGE or MESSAGES parameters.');
   }
+
+  const openai = new OpenAI({
+    apiKey: context.OPENAI_API_KEY,
+  });
 
   try {
     const formatMessage = (body, author) => ({
@@ -41,18 +42,15 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
 
     messages.forEach(({ body, author }) => prompt.push(formatMessage(body, author)));
 
-    const result = await openai.createChatCompletion({
-      model: 'gpt-4',
+    const result = await openai.chat.completions.create({
+      model: context.OPENAI_MODEL,
       messages: prompt,
       max_tokens: 40,
       temperature: 0.3,
     });
 
-    const { status } = result;
-    response.setStatusCode(status);
-
-    if (result.data.choices[0].message.content) {
-      const messageRecommendation = result.data.choices[0].message.content?.trim();
+    if (result.choices[0].message.content) {
+      const messageRecommendation = result.choices[0].message.content?.trim();
       response.setBody({ messageRecommendation, ...extractStandardResponse(result) });
       return callback(null, response);
     }
