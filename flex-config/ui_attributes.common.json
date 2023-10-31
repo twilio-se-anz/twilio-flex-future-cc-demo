@@ -21,6 +21,9 @@
       "video_invite_card": {
         "enabled": true
       },
+      "realtime_voice_suggestions": {
+         "enabled": true
+      },
       "message_recommendation": {
         "enabled": true
       }
