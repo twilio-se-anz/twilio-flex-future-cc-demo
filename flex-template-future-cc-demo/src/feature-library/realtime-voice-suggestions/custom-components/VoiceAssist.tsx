@@ -18,8 +18,6 @@ import client from '../../../utils/sdk-clients/sync/SyncClient';
 import { TranscriptTurn } from '../types/VoiceAssistTypes';
 import AiSuggestion from './AiSuggestions';
 
-// import useSyncClient from '../services/SyncClientHelper';
-
 export interface CallTranscriptProps {
   task: any;
 }
@@ -34,7 +32,6 @@ const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) 
   const [transcript, setTranscript] = useState<TranscriptTurn[]>([]);
   const [intermediateResult, setIntermediateResult] = useState<string>('');
 
-  // const syncClient = useSyncClient(Flex.Manager.getInstance().user.identity);
   let stream: any; // twilio-sync does not export the SyncStream type
 
   useEffect(() => {

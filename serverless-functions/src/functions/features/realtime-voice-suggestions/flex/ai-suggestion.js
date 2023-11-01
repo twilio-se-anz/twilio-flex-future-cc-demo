@@ -17,7 +17,6 @@ const requiredParameters = [
 exports.handler = prepareFlexFunction(requiredParameters, async (context, event, callback, response, handleError) => {
   const { messages: stringMessages, language } = event;
   const transcript = JSON.parse(event.transcript);
-  // const transcript = event.transcript;
   const openai = new OpenAI({
     apiKey: context.OPENAI_API_KEY,
   });
