@@ -12,24 +12,23 @@ import {
   Stack,
 } from '@twilio-paste/core';
 import { useEffect, useState } from 'react';
-import { withTaskContext } from '@twilio/flex-ui';
-
 import client from '../../../utils/sdk-clients/sync/SyncClient';
 import { TranscriptTurn } from '../types/VoiceAssistTypes';
 import AiSuggestion from './AiSuggestions';
+import { Task } from 'types/task-router';
 
-// import useSyncClient from '../services/SyncClientHelper';
-
-export interface CallTranscriptProps {
-  task: any;
-}
+export type VoiceAssistTabProps = {
+  props: {
+    task?: Task;
+  };
+};
 
 export type SyncStreamEvent = {
   message: any; // twilio-sync does not export the StreamMessage type
   isLocal: boolean;
 };
 
-const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) => {
+const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
   const [loading, setLoading] = useState(true);
   const [transcript, setTranscript] = useState<TranscriptTurn[]>([]);
   const [intermediateResult, setIntermediateResult] = useState<string>('');
@@ -137,4 +136,4 @@ const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) 
   );
 };
 
-export default withTaskContext(VoiceAssist);
+export default VoiceAssistTab;
