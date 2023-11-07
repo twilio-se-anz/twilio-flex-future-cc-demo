@@ -13,8 +13,8 @@ async function delay<T>(ms: number, result?: T) {
 
 export default abstract class ApiService {
   readonly serverlessDomain: string;
-
   readonly serverlessProtocol: string;
+  readonly serverlessPort: string;
 
   protected manager = Flex.Manager.getInstance();
 
@@ -25,17 +25,22 @@ export default abstract class ApiService {
 
     this.serverlessProtocol = 'https';
     this.serverlessDomain = '';
+    this.serverlessPort = '';
+
+    if (custom_data?.serverless_functions_protocol_future_cc_demo)
+      this.serverlessProtocol = custom_data.serverless_functions_protocol_future_cc_demo;
 
     if (process.env?.FLEX_APP_SERVERLESS_FUNCTONS_DOMAIN)
       this.serverlessDomain = process.env?.FLEX_APP_SERVERLESS_FUNCTONS_DOMAIN;
 
-    if (custom_data?.serverless_functions_domain_future_cc_demo) this.serverlessDomain = custom_data.serverless_functions_domain_future_cc_demo;
+    if (custom_data?.serverless_functions_domain_future_cc_demo)
+      this.serverlessDomain = custom_data.serverless_functions_domain_future_cc_demo;
 
-    if (custom_data?.serverless_functions_protocol) this.serverlessProtocol = custom_data.serverless_functions_protocol;
+    if (custom_data?.serverless_functions_port_future_cc_demo)
+      this.serverlessDomain += `:${custom_data.serverless_functions_port_future_cc_demo}`;
 
-    if (custom_data?.serverless_functions_port) this.serverlessDomain += `:${custom_data.serverless_functions_port}`;
-
-    if (!this.serverlessDomain) console.error('serverless_functions_domain_future_cc_demo is not set in flex config or env file');
+    if (!this.serverlessDomain)
+      console.error('serverless_functions_domain_future_cc_demo is not set in flex config or env file');
   }
 
   protected buildBody(encodedParams: EncodedParams): string {
