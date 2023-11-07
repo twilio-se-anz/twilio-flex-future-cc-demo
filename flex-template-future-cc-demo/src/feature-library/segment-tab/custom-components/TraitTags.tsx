@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Stack, Badge, SkeletonLoader } from '@twilio-paste/core';
 
-import { SegmentTraits } from '../../types/Segment/SegmentTraits';
-import { KnownTraits } from '../../flex-hooks/strings/segmentTraits';
+import { SegmentTraits } from '../types/Segment/SegmentTraits';
+import { KnownTraits } from '../../../types/segment/KnownTraits';
 
 type TraitTagsProps = {
   traits: SegmentTraits;

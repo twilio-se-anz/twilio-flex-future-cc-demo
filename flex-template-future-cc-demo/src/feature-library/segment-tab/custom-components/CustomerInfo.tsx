@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Text,
@@ -9,12 +9,12 @@ import {
   THead,
   Tr,
   Card,
-  Heading,
   Avatar,
   MediaBody,
   MediaFigure,
   MediaObject,
   Stack,
+  SkeletonLoader,
   Separator,
   Badge,
 } from '@twilio-paste/core';
@@ -23,21 +23,44 @@ import { ThumbsUpIcon } from '@twilio-paste/icons/esm/ThumbsUpIcon';
 import { BusinessIcon } from '@twilio-paste/icons/esm/BusinessIcon';
 import { CommunityIcon } from '@twilio-paste/icons/esm/CommunityIcon';
 import { StarIcon } from '@twilio-paste/icons/esm/StarIcon';
+import { SegmentTraits } from '../types/Segment/SegmentTraits';
+import { withTaskContext } from '@twilio/flex-ui';
 
-const FauxCustomerInfo = () => {
+type Props = {
+  traits: SegmentTraits;
+  loading: boolean;
+};
+
+const CustomerInfo = ({ traits, loading }: Props) => {
+  if (loading)
+    return (
+      <Card>
+        <Stack orientation={'vertical'} spacing={'space70'}>
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+        </Stack>
+      </Card>
+    );
+
   return (
     <Card>
       <Stack orientation={'vertical'} spacing={'space40'}>
-        <MediaObject as="div" verticalAlign="center">
-          <MediaFigure as="div" spacing="space40">
-            <Avatar size="sizeIcon90" name="John Tan" src="https://i.pravatar.cc/300?img=62" />
-          </MediaFigure>
-          <MediaBody as="div">
-            <Text as="h2" variant="heading50" fontSize={'fontSize60'} fontWeight="fontWeightBold">
-              John Tan
-            </Text>
-          </MediaBody>
-        </MediaObject>
+        {traits && traits.first_name && traits.last_name && (
+          <MediaObject as="div" verticalAlign="center">
+            <MediaFigure as="div" spacing="space40">
+              <Avatar size="sizeIcon90" name={traits.first_name + ' ' + traits.last_name} />
+            </MediaFigure>
+            <MediaBody as="div">
+              <Text as="h2" variant="heading50" fontSize={'fontSize60'} fontWeight="fontWeightBold">
+                {traits.first_name} {traits.last_name}
+              </Text>
+            </MediaBody>
+          </MediaObject>
+        )}
 
         <Table>
           <THead>
@@ -49,8 +72,8 @@ const FauxCustomerInfo = () => {
             <Tr>
               <Td>
                 <Text as="span" display={'flex'}>
-                  <CommunityIcon decorative={true} about="Age Group" />
-                  <Box marginLeft="space40">30-40</Box>
+                  <StarIcon decorative={true} about="Age Group" />
+                  <Box marginLeft="space40">35-45</Box>
                 </Text>
               </Td>
             </Tr>
@@ -58,8 +81,8 @@ const FauxCustomerInfo = () => {
             <Tr>
               <Td>
                 <Text as="span" display={'flex'}>
-                  <BusinessIcon decorative={true} about="Location" />
-                  <Box marginLeft="space40">Singapore</Box>
+                  <ThumbsUpIcon decorative={true} about="Location" />
+                  <Box marginLeft="space40">Newtown</Box>
                 </Text>
               </Td>
             </Tr>
@@ -67,7 +90,7 @@ const FauxCustomerInfo = () => {
             <Tr>
               <Td>
                 <Text as="span" display={'flex'}>
-                  <StarIcon decorative={true} about="Segment" />
+                  <BusinessIcon decorative={true} about="Segment" />
                   <Box marginLeft="space40">High Net Wealth</Box>
                 </Text>
               </Td>
@@ -76,7 +99,7 @@ const FauxCustomerInfo = () => {
             <Tr>
               <Td>
                 <Text as="span" display={'flex'}>
-                  <ThumbsUpIcon decorative={true} about="Technology Profile" />
+                  <CommunityIcon decorative={true} about="Technology Profile" />
                   <Box marginLeft="space40">Digital Native</Box>
                 </Text>
               </Td>
@@ -110,4 +133,4 @@ const FauxCustomerInfo = () => {
   );
 };
 
-export default FauxCustomerInfo;
+export default withTaskContext(CustomerInfo);

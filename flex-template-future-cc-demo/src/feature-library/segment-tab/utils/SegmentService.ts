@@ -1,8 +1,8 @@
-import ApiService from '../../../../utils/serverless/ApiService';
-import { EncodedParams } from '../../../../types/serverless';
-import { SegmentTrackData } from '../../types/Segment/SegmentTrackData';
-import { SegmentTraits } from '../../types/Segment/SegmentTraits';
-import { EventResponse } from '../../types/Segment/EventResponse';
+import ApiService from '../../../utils/serverless/ApiService';
+import { EncodedParams } from '../../../types/serverless';
+import { SegmentTrackData } from '../types/Segment/SegmentTrackData';
+import { SegmentTraits } from '../types/Segment/SegmentTraits';
+import { EventResponse } from '../types/Segment/EventResponse';
 
 class SegmentService extends ApiService {
   userTraitsCache: Record<string, SegmentTraits> = {};
@@ -17,7 +17,9 @@ class SegmentService extends ApiService {
 
       const encodedParams: EncodedParams = {
         userId,
-        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
+        Token: encodeURIComponent(
+          this.manager.store.getState().flex.session.ssoTokenPayload.token
+        ),
       };
 
       this.fetchJsonWithReject<SegmentTraits>(
@@ -26,14 +28,17 @@ class SegmentService extends ApiService {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: this.buildBody(encodedParams),
-        },
+        }
       )
         .then((response) => {
           this.userTraitsCache[userId] = response;
           resolve(response);
         })
         .catch((error) => {
-          console.error(`Segment Service - Error fetching traits for user: \r\n`, error);
+          console.error(
+            `Segment Service - Error fetching traits for user: \r\n`,
+            error
+          );
           reject(error);
         });
     });
@@ -48,7 +53,9 @@ class SegmentService extends ApiService {
 
       const encodedParams: EncodedParams = {
         userId,
-        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
+        Token: encodeURIComponent(
+          this.manager.store.getState().flex.session.ssoTokenPayload.token
+        ),
       };
 
       this.fetchJsonWithReject<EventResponse[]>(
@@ -57,7 +64,7 @@ class SegmentService extends ApiService {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: this.buildBody(encodedParams),
-        },
+        }
       )
         .then((response) => {
           this.userEventsCache[userId] = response;
@@ -73,7 +80,9 @@ class SegmentService extends ApiService {
   sendToSegment = async (data: SegmentTrackData): Promise<any> => {
     return new Promise((resolve, reject) => {
       const encodedParams: EncodedParams = {
-        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
+        Token: encodeURIComponent(
+          this.manager.store.getState().flex.session.ssoTokenPayload.token
+        ),
       };
 
       this.fetchJsonWithReject<EventResponse[]>(
@@ -84,7 +93,7 @@ class SegmentService extends ApiService {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        },
+        }
       )
         .then((response) => {
           resolve(response);

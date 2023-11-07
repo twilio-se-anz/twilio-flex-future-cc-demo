@@ -10,7 +10,9 @@
         "enabled": true
       },
       "adaptive_cards": {
-        "enabled": true
+        "enabled": true,
+        "show_cards_tab": true,
+        "tab_order": 1
       },
       "panel2_multitabs": {
         "enabled": true
@@ -22,10 +24,14 @@
         "enabled": true
       },
       "realtime_voice_suggestions": {
-         "enabled": true
+        "enabled": true
       },
       "message_recommendation": {
         "enabled": true
+      },
+      "segment_tab": {
+        "enabled": false,
+        "tab_order": 1
       }
     }
   }
