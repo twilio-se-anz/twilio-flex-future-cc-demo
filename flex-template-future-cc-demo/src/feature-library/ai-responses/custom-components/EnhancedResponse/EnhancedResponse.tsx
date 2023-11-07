@@ -8,7 +8,7 @@ import { ResponseEnhancerWrapper } from './ResponseEnhancerWrapperStyles';
 import AiResponsesService from '../../utils/AiResponsesService';
 import { personas } from '../../types/Personas';
 import SegmentService from '../../../segment-tab/utils/SegmentService';
-import { KnownTraits } from '../../../segment-tab/flex-hooks/strings/KnownTraits';
+import { KnownTraits } from '../../../../types/segment/KnownTraits';
 import { SegmentTraits } from '../../../segment-tab/types/Segment/SegmentTraits';
 
 interface OwnProps {
