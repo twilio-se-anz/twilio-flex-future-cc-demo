@@ -1,10 +1,5 @@
 [
   {
-    "label": "Video Invite",
-    "text": "Invitation to join a video conference",
-    "file": "video_invite.json"
-  },
-  {
     "label": "Activate your card",
     "text": "Activate your card online or by phone.",
     "file": "activate_card.json"
