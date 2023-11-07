@@ -13,8 +13,8 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
       return;
     }
 
-    if (Flex.TaskHelper.isChatBasedTask(payload.task)) {
-      console.log('Not adding voice assist as task is CBM');
+    if (!Flex.TaskHelper.isCallTask(payload.task)) {
+      console.log('Not adding realtime suggestions to non-call task');
       return;
     }
 
