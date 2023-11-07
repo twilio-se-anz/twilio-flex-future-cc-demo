@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Stack, SkeletonLoader } from '@twilio-paste/core';
 import Typography from '@material-ui/core/Typography';
-import { SegmentTraits } from '../../types/Segment/SegmentTraits';
+import { SegmentTraits } from '../types/Segment/SegmentTraits';
 import Progress from './Progress';
 
 type EngagementMetricsProps = {

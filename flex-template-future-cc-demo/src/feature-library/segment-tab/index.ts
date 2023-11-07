@@ -5,5 +5,5 @@ import hooks from './flex-hooks/**/*.*';
 
 export const register = (): FeatureDefinition => {
   if (!isFeatureEnabled()) return {};
-  return { name: 'panel2-multitabs', hooks: typeof hooks === 'undefined' ? [] : hooks };
+  return { name: 'segment-tab', hooks: typeof hooks === 'undefined' ? [] : hooks };
 };

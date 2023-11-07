@@ -2,22 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Box, Card, Column, Grid, Heading, Paragraph, Stack } from '@twilio-paste/core';
 import { withTaskContext } from '@twilio/flex-ui';
 
-import SegmentService from '../../utils/SegmentService/SegmentService';
-import { SegmentTraits } from '../../types/Segment/SegmentTraits';
-import { EventResponse } from '../../types/Segment/EventResponse';
-import FauxSuggestions from '../FauxCustomerProfile/FauxSuggestions';
+import SegmentService from '../utils/SegmentService';
+import { SegmentTraits } from '../types/Segment/SegmentTraits';
+import { EventResponse } from '../types/Segment/EventResponse';
+import FauxSuggestions from './FauxSuggestions';
 import EngagementMetrics from './EngagementMetrics';
 import TraitTags from './TraitTags';
 
 type SegmentViewProps = {
-  task?: any;
+  props: {
+    task?: any;
+  }
 };
 
-const SegmentView = (props: SegmentViewProps) => {
+const SegmentView = ({ props }: SegmentViewProps) => {
+  const task = props.task;
+
   const [isLoadingTraits, setLoadingTraits] = useState(true);
   const [isLoadingEvents, setLoadingEvents] = useState(true);
   const [traits, setTraits] = useState<SegmentTraits>({});
   const [events, setEvents] = useState<EventResponse[]>([]);
+
 
   useEffect(() => {
     setLoadingTraits(true);
@@ -25,8 +30,8 @@ const SegmentView = (props: SegmentViewProps) => {
 
     SegmentService.fetchTraitsForUser(
       props.task.attributes.email ||
-        props.task.attributes?.customers?.email ||
-        props.task.attributes?.pre_engagement_data?.email,
+      props.task.attributes?.customers?.email ||
+      props.task.attributes?.pre_engagement_data?.email,
     )
       .then((userTraits) => setTraits(userTraits))
       .catch((err) => console.error('Segment view - Error fetching user traits', err))
@@ -34,8 +39,8 @@ const SegmentView = (props: SegmentViewProps) => {
 
     SegmentService.fetchEventsForUser(
       props.task.attributes.email ||
-        props.task.attributes?.customers?.email ||
-        props.task.attributes?.pre_engagement_data?.email,
+      props.task.attributes?.customers?.email ||
+      props.task.attributes?.pre_engagement_data?.email,
     )
       .then((events) => setEvents(events))
       .catch((err) => console.log('Segment view - Error getting events', err))
@@ -94,4 +99,4 @@ const SegmentView = (props: SegmentViewProps) => {
   );
 };
 
-export default withTaskContext(SegmentView);
+export default SegmentView;
