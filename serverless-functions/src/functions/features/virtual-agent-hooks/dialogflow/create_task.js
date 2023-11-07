@@ -7,9 +7,10 @@ const formatLabel = (str) => {
   return str2;
 };
 
-export const handler = async function (context, event, callback) {
-  let response = new Twilio.Response();
+const { prepareStudioFunction } = require(Runtime.getFunctions()['common/helpers/function-helper'].path);
+const requiredParameters = ['fulfillmentInfo'];
 
+exports.handler = prepareStudioFunction(requiredParameters, async (context, event, callback, response, handleError) => {
   console.log('>>> INCOMING >>>');
   console.log(event);
 
@@ -27,12 +28,9 @@ export const handler = async function (context, event, callback) {
 
     console.log(`Created task ${task.sid}`);
     response.setBody({ status: 'created', task_sid: task.sid });
-    callback(null, response);
+    return callback(null, response);
   } catch (e) {
     console.error(`Failed to create task ` + event.fulfillmentInfo.tag);
-    response.setStatusCode(500);
-    response.setBody(e.message);
-    console.error(e);
-    callback(null, response);
+    return handleError(e);
   }
-};
+});
