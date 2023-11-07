@@ -17,16 +17,18 @@ class ConversationCardsService extends ApiService {
       }
 
       const encodedParams: EncodedParams = {
-        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
+        Token: encodeURIComponent(
+          this.manager.store.getState().flex.session.ssoTokenPayload.token
+        ),
       };
 
       this.fetchJsonWithReject<ConversationCardsResponse>(
-        `${this.serverlessProtocol}://${this.serverlessDomain}/features/conversation-cards/flex/chat-responses`,
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/adaptive-cards/flex/get-cards`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: this.buildBody(encodedParams),
-        },
+        }
       )
         .then((response) => {
           this.cannedResponseCache = response;

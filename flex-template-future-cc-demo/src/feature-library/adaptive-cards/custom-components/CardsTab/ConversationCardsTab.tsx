@@ -3,14 +3,14 @@ import { Box } from '@twilio-paste/core/box';
 import { Text } from '@twilio-paste/core/text';
 import { SkeletonLoader } from '@twilio-paste/core/skeleton-loader';
 import { Column, Grid } from '@twilio-paste/core/grid';
-import { ICard } from '../../../types/ConversationCards';
-import ConversationCardsService from '../../../utils/ConversationCards/ConversationCardsService';
-import ConversationCard from '../ConversationCard/ConversationCard';
+import { ICard } from '../../types/ConversationCards';
+import ConversationCardsService from '../../utils/ConversationCards/ConversationCardsService';
+import ConversationCard from './ConversationCard';
 import { Template, templates } from '@twilio/flex-ui';
-import { StringTemplates } from '../../../flex-hooks/strings';
-import { Heading, Stack } from '@twilio-paste/core';
+import { StringTemplates } from '../../flex-hooks/strings';
+import { Heading } from '@twilio-paste/core';
 
-const ConversationCardsCRM: React.FunctionComponent = () => {
+const ConversationCardsTab: React.FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [conversationCards, setConversationCards] = useState<undefined | ICard[]>(undefined);
@@ -61,4 +61,4 @@ const ConversationCardsCRM: React.FunctionComponent = () => {
   );
 };
 
-export default ConversationCardsCRM;
+export default ConversationCardsTab;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ITask, withTaskContext } from '@twilio/flex-ui';
-import { replaceStringAttributes } from '../../../utils/ConversationCards/helpers';
+import { replaceStringAttributes } from '../../utils/ConversationCards/helpers';
 import { Card, Heading, Paragraph } from '@twilio-paste/core';
 
 interface ConversationCardProps {
