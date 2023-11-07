@@ -33,8 +33,6 @@ export default abstract class ApiService {
     if (custom_data?.serverless_functions_domain_future_cc_demo)
       this.serverlessDomain = custom_data.serverless_functions_domain_future_cc_demo;
 
-    if (custom_data?.serverless_functions_protocol) this.serverlessProtocol = custom_data.serverless_functions_protocol;
-    if (custom_data?.serverless_functions_port) this.serverlessDomain += `:${custom_data.serverless_functions_port}`;
     if (custom_data?.serverless_functions_port_future_cc_demo)
       this.serverlessDomain += `:${custom_data.serverless_functions_port_future_cc_demo}`;
 
