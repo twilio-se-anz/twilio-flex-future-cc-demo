@@ -1,0 +1,31 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "fallbackText": "This card requires Media to be viewed. Ask your platform to update to Adaptive Cards v1.6 for this and more!",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Manage your card online",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "text": "See our simple instructions to order a replacement debit or credit card. We can show you how to pay or change your ANZ credit card. You can also add a trusted friend, partner or family member as an additional cardholder. ",
+      "wrap": true
+    },
+    {
+      "type": "Image",
+      "url": "https://www.anz.com.au/content/dam/anzcomau/illustration/support/help-topic-payments.svg"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Learn more",
+      "style": "positive",
+      "url": "https://www.anz.com.au/support/manage-your-card/"
+    }
+  ]
+}

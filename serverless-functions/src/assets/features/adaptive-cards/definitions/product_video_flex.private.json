@@ -1,0 +1,49 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "fallbackText": "This card requires Media to be viewed. Ask your platform to update to Adaptive Cards v1.6 for this and more!",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Twilio Flex Contact Center",
+      "wrap": true,
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Twilio Flex is a digital engagement center for the entire customer journey—a sales tool for pre-purchase conversations, a cloud-based contact center, and an in-app digital concierge.",
+      "wrap": true
+    },
+    {
+      "type": "Media",
+      "poster": "https://www.twilio.com/content/dam/twilio-com/global/en/products/flex/overview/overview_flex_hero@2x.png/_jcr_content/renditions/compressed-original.webp",
+      "altText": "Adaptive Cards overview video",
+      "sources": [
+        {
+          "mimeType": "video/mp4",
+          "url": "https://www.youtube.com/watch?v=DCGdm6MMmVY"
+        }
+      ],
+      "captionSources": [
+        {
+          "mimeType": "vtt",
+          "label": "English (vtt)",
+          "url": "https://raw.githubusercontent.com/microsoft/AdaptiveCards/5ac07e8adb8d7dcd7480973321e57d279d1f7d2c/assets/ProductVideoSubtitles.vtt"
+        },
+        {
+          "mimeType": "srt",
+          "label": "English (srt)",
+          "url": "https://raw.githubusercontent.com/microsoft/AdaptiveCards/da2eb4ad4de60d14b37decc062d3952da9dbb790/assets/ProductVideoSubtitles.srt"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Learn more",
+      "url": "https://twilio.com"
+    }
+  ]
+}
