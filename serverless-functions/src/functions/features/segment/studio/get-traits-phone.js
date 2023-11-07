@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 const { prepareStudioFunction } = require(Runtime.getFunctions()['common/helpers/function-helper'].path);
-const requiredParameters = ['userId'];
+const requiredParameters = ['From'];
 
 exports.handler = prepareStudioFunction(requiredParameters, async (context, event, callback, response, handleError) => {
   try {
