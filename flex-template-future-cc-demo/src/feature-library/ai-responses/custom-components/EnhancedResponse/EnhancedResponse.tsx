@@ -7,9 +7,9 @@ import { Button, Select, Option, Switch, Text, Flex as PasteFlex } from '@twilio
 import { ResponseEnhancerWrapper } from './ResponseEnhancerWrapperStyles';
 import AiResponsesService from '../../utils/AiResponsesService';
 import { personas } from '../../types/Personas';
-import SegmentService from '../../../panel2-multitabs/utils/SegmentService/SegmentService';
-import { KnownTraits } from '../../../panel2-multitabs/flex-hooks/strings/segmentTraits';
-import { SegmentTraits } from '../../../panel2-multitabs/types/Segment/SegmentTraits';
+import SegmentService from '../../../segment-tab/utils/SegmentService';
+import { KnownTraits } from '../../../segment-tab/flex-hooks/strings/KnownTraits';
+import { SegmentTraits } from '../../../segment-tab/types/Segment/SegmentTraits';
 
 interface OwnProps {
   // Props passed directly to the component
