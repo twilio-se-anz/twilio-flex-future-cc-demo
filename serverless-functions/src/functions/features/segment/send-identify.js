@@ -7,7 +7,7 @@ exports.handler = prepareStudioFunction(requiredParameters, async (context, even
   try {
     if (!context.SEGMENT_WRITE_KEY) {
       response.setBody({ error: 'Write key not set' });
-      callback(response);
+      return callback(null, response);
     }
 
     let token = Buffer.from(`${context.SEGMENT_WRITE_KEY}:`, 'utf8').toString('base64');
