@@ -21,7 +21,7 @@ class SegmentService extends ApiService {
       };
 
       this.fetchJsonWithReject<SegmentTraits>(
-        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/get-traits`,
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/flex/get-traits`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -52,7 +52,7 @@ class SegmentService extends ApiService {
       };
 
       this.fetchJsonWithReject<EventResponse[]>(
-        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/get-events`,
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/flex/get-events`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -77,7 +77,7 @@ class SegmentService extends ApiService {
       };
 
       this.fetchJsonWithReject<EventResponse[]>(
-        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/send-events`,
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/send-event`,
         {
           method: 'POST',
           headers: {
