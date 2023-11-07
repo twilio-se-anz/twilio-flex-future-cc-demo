@@ -27,6 +27,9 @@ export default abstract class ApiService {
     this.serverlessDomain = '';
     this.serverlessPort = '';
 
+    if (custom_data?.serverless_functions_protocol_future_cc_demo)
+      this.serverlessProtocol = custom_data.serverless_functions_protocol_future_cc_demo;
+
     if (process.env?.FLEX_APP_SERVERLESS_FUNCTONS_DOMAIN)
       this.serverlessDomain = process.env?.FLEX_APP_SERVERLESS_FUNCTONS_DOMAIN;
 
