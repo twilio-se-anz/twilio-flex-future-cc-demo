@@ -1,6 +1,5 @@
 import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@twilio-paste/core';
 import { useUID } from '@twilio-paste/core/dist/uid-library';
-import ConversationCardsCRM from '../ConversationCards/ConversationCardsCRM';
 import SegmentView from '../Segment/SegmentView';
 import ConversationSummaryCard from '../ConversationSummary/ConversationSummaryCard';
 
@@ -18,9 +17,6 @@ const Panel2Tabs = () => {
         <TabPanels>
           <TabPanel>
             <SegmentView />
-          </TabPanel>
-          <TabPanel>
-            <ConversationCardsCRM />
           </TabPanel>
         </TabPanels>
       </Tabs>
