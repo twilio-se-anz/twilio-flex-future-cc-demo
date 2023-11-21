@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo 'Tests to come'; exit 1",
     "start": "twilio serverless:start",
-    "deploy": "twilio serverless:deploy --override-existing-project --runtime node16",
+    "deploy": "twilio serverless:deploy --override-existing-project --runtime node18",
     "deploy-env": "npm run deploy -- --env \".env.$ENVIRONMENT\"",
     "install-serverless-plugin": "twilio plugins:install @twilio-labs/plugin-serverless@v2",
     "lint": "eslint .",
@@ -34,6 +34,6 @@
     "typescript": "^5.2.2"
   },
   "engines": {
-    "node": "16"
+    "node": "18"
   }
 }
