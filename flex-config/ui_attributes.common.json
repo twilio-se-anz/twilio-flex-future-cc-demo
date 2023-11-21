@@ -29,6 +29,9 @@
       "segment_tab": {
         "enabled": false,
         "tab_order": 1
+      },
+      "webrtc_support": {
+        "enabled": true
       }
     }
   }
