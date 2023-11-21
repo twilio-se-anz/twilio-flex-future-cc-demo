@@ -14,9 +14,6 @@
         "show_cards_tab": true,
         "tab_order": 1
       },
-      "panel2_multitabs": {
-        "enabled": true
-      },
       "ai_responses": {
         "enabled": true
       },
