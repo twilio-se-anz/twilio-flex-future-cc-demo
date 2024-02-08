@@ -152,10 +152,6 @@ jobs:
       - name: deploy serverless
         working-directory: serverless-functions
         run: |
-          ls -al src
-          ls -al src/assets
-          ls -al src/assets/features
-          ls -al src/assets/features/future-cc
           npm run install-serverless-plugin
           npm run deploy-env
 

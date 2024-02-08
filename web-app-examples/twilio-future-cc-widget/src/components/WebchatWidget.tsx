@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { CustomizationProvider, CustomizationProviderProps } from "@twilio-paste/core/customization";
-import { CSSProperties, FC, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { render } from "react-dom";
 import { Heading } from "@twilio-paste/core";
 
@@ -11,7 +11,7 @@ import { initSession } from "../store/actions/initActions";
 import { changeEngagementPhase, changeExpandedStatus } from "../store/actions/genericActions";
 import { useAnalytics } from "./Analytics";
 
-const AnyCustomizationProvider: FC<CustomizationProviderProps & { style: CSSProperties }> = CustomizationProvider;
+const AnyCustomizationProvider: FC<CustomizationProviderProps> = CustomizationProvider;
 
 export function WebchatWidget() {
     const theme = useSelector((state: AppState) => state.config.theme);
