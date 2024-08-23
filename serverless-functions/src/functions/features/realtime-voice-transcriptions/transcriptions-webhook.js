@@ -1,5 +1,5 @@
-
 const { OpenAI } = require('openai');
+const { isString, isObject, isNumber } = require('lodash');
 const SyncOperations = require(Runtime.getFunctions()['common/twilio-wrappers/sync'].path);
 exports.handler = async function (context, event, callback) {
     const openai = new OpenAI({
@@ -22,15 +22,20 @@ exports.handler = async function (context, event, callback) {
             console.log('transcriptionEvent: transcription-started: ', event.CallSid);
 
             //Create Sync Stream
-            const syncStreamResult = await SyncOperations.createStream({ context, name: `TRANSCRIPTION_${event.CallSid}` });
+            const syncStreamResult = await SyncOperations.createStream({
+                context,
+                name: `TRANSCRIPTION_${event.CallSid}`,
+                syncServiceSid: context.TWILIO_FLEX_SYNC_SID
+            });
             console.log('Sync Stream create: ', syncStreamResult);
 
-            // Create Sync map Item for call sid with TTL
+            // Create Sync map Item for call sid with 
             const SyncMapResult = await SyncOperations.createMapItem({
                 context,
                 mapSid: context.MAP_CALL_LOG,
                 key: event.CallSid,
-                ttl: 84000,
+                ttl: parseInt(context.TWILIO_TRANSCRIPTON_SYNC_TTL),
+                syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
                 data: { syncStream: syncStreamResult.stream.sid }
             })
             console.log('Sync Map Item create: ', SyncMapResult)
@@ -44,7 +49,12 @@ exports.handler = async function (context, event, callback) {
                     type: 'transcript',
                     taranscriptionText: transcript,
                 }
-                const streamMessageInboundResult = await SyncOperations.createStreamMessage({ context, name: `TRANSCRIPTION_${event.CallSid}`, data: syncStreamInboundData });
+                const streamMessageInboundResult = await SyncOperations.createStreamMessage({
+                    context,
+                    name: `TRANSCRIPTION_${event.CallSid}`,
+                    data: syncStreamInboundData,
+                    syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
+                });
                 console.log(streamMessageInboundResult);
 
                 const prompt = [];
@@ -55,7 +65,7 @@ exports.handler = async function (context, event, callback) {
                     content: `Always respond with a json array containing one or more objects with keys "suggestion" and "title", always complete both fields. You are a customer service agent assistant. Here is the call transcript so far, make a recommendation to the agent with the next best action or suggestion. Use the customers language where possible.`,
                 });
                 const result = await openai.chat.completions.create({
-                    model: 'gpt-3.5-turbo',
+                    model: context.OPENAI_MODEL,
                     messages: prompt,
                 });
 
@@ -71,7 +81,12 @@ exports.handler = async function (context, event, callback) {
                             type: 'suggestion',
                             suggestionsFromAI: suggestions,
                         }
-                        const streamMessageAIResult = await SyncOperations.createStreamMessage({ context, name: `TRANSCRIPTION_${event.CallSid}`, data: syncStreamAIData });
+                        const streamMessageAIResult = await SyncOperations.createStreamMessage({
+                            context,
+                            name: `TRANSCRIPTION_${event.CallSid}`,
+                            data: syncStreamAIData,
+                            syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
+                        });
                         console.log(streamMessageAIResult);
                     } catch (err) {
                         success = false;
@@ -88,7 +103,12 @@ exports.handler = async function (context, event, callback) {
                     type: 'transcript',
                     taranscriptionText: transcript,
                 }
-                const streamMessageOutboundResult = await SyncOperations.createStreamMessage({ context, name: `TRANSCRIPTION_${event.CallSid}`, data: syncStreamOutboundData });
+                const streamMessageOutboundResult = await SyncOperations.createStreamMessage({
+                    context,
+                    name: `TRANSCRIPTION_${event.CallSid}`,
+                    data: syncStreamOutboundData,
+                    syncServiceSid: context.TWILIO_FLEX_SYNC_SID
+                });
                 console.log(streamMessageOutboundResult);
             }
             break;
@@ -100,14 +120,16 @@ exports.handler = async function (context, event, callback) {
             const SyncMapItemDeleteResult = await SyncOperations.deleteMapItem({
                 context,
                 mapSid: context.MAP_CALL_LOG,
-                key: event.CallSid
+                key: event.CallSid,
+                syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
             })
             console.log('Sync Map Item deleted: ', SyncMapItemDeleteResult)
 
             const SyncStreamDeleteResult = await SyncOperations.deleteStream({
                 context,
                 mapSid: context.MAP_CALL_LOG,
-                name: `TRANSCRIPTION_${event.CallSid}`
+                name: `TRANSCRIPTION_${event.CallSid}`,
+                syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
             })
             console.log('Sync Stream deleted: ', SyncStreamDeleteResult)
             break;
