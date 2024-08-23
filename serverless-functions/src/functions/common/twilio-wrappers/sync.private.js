@@ -55,7 +55,7 @@ exports.deleteMapItem = async function deleteMapItem(parameters) {
   try {
     const client = context.getTwilioClient();
 
-    await client.sync.services(context.TWILIO_FLEX_SYNC_SID).syncMaps(mapSid).syncMapItems(key).remove();
+    await client.sync.v1.services(context.TWILIO_FLEX_SYNC_SID).syncMaps(mapSid).syncMapItems(key).remove();
 
     return { success: true, status: 200 };
   } catch (error) {
@@ -231,5 +231,86 @@ exports.updateDocumentData = async function updateDocumentData(parameters) {
     return { success: true, status: 200, document: documentUpdate };
   } catch (error) {
     return retryHandler(error, parameters, exports.updateDocumentData);
+  }
+};
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.name the sid of the Sync stream 
+ * @returns {object} A Sync document
+ * @description the following method is used to fetch a sync document
+ */
+exports.createStream = async function createStream(parameters) {
+  const { context, name } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(name))
+    throw new Error('Invalid parameters object passed. Parameters must contain name of stream string value');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const stream = await client.sync.v1.services(context.TWILIO_FLEX_SYNC_SID).syncStreams.create({ 'uniqueName': name, 'ttl': 86400 });
+
+    return { success: true, status: 200, stream };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.createStream);
+  }
+};
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.name the sid of the Sync stream 
+ * @returns {object} A Sync document
+ * @description the following method is used to fetch a sync document
+ */
+exports.deleteStream = async function deleteStream(parameters) {
+  const { context, name } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(name))
+    throw new Error('Invalid parameters object passed. Parameters must contain name of stream string value');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const stream = await client.sync.v1.services(context.TWILIO_FLEX_SYNC_SID).syncStreams(name).remove();
+
+    return { success: true, status: 200, stream };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.deleteStream);
+  }
+};
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.name the sid of the Sync stream name
+ * @param {object} parameters.data A Sync stream message data
+ * @returns {object} A Sync stream
+ * @description the following method is used to fetch a sync document
+ */
+exports.createStreamMessage = async function createStreamMessage(parameters) {
+  const { context, name, data } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(name))
+    throw new Error('Invalid parameters object passed. Parameters must contain name of stream string value');
+  if (!isObject(data))
+    throw new Error('Invalid parameters object passed. Parameters must contain data object');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const stream = await client.sync.v1.services(context.TWILIO_FLEX_SYNC_SID).syncStreams(name).streamMessages.create({ data });;
+
+    return { success: true, status: 200, stream };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.createStreamMessage);
   }
 };
