@@ -1,7 +1,7 @@
 import * as Flex from '@twilio/flex-ui';
 
 import { FlexActionEvent } from '../../../../types/feature-loader';
-import VoiceAssistTab from '../../custom-components/VoiceAssist';
+import LegacyVoiceAssist from '../../custom-components/LegacyVoiceAssist';
 
 // If Enhanced CRM Container Tabs are enabled, register the individual components as Tabs
 export const actionEvent = FlexActionEvent.before;
@@ -24,7 +24,7 @@ export const actionHook = function addToEnhancedCRM(flex: typeof Flex, manager: 
       {
         title: 'Voice AI',
         order: 25, // optionally define preferred tab order, defaults to 999 if not present
-        component: <VoiceAssistTab props={payload} key="voice-assist-tab" />,
+        component: <LegacyVoiceAssist props={payload} key="voice-assist-tab" />,
       },
     ];
   });

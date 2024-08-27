@@ -35,7 +35,7 @@ export type SyncStreamEvent = {
   isLocal: boolean;
 };
 
-const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
+const LegacyVoiceAssist: React.FC<VoiceAssistTabProps> = ({ props }) => {
   const [loading, setLoading] = useState(true);
   const [transcript, setTranscript] = useState<TranscriptTurn[]>([]);
   const [intermediateResult, setIntermediateResult] = useState<string>('');
@@ -148,4 +148,4 @@ const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
   );
 };
 
-export default VoiceAssistTab;
+export default LegacyVoiceAssist;
