@@ -46,7 +46,7 @@ exports.handler = async function handler(context, event, callback) {
         const transcript = JSON.parse(event.TranscriptionData).transcript;
         console.log('transcription: user: ', transcript);
         const syncStreamInboundData = {
-          actor: 'Inbound',
+          actor: 'inbound',
           type: 'transcript',
           transcriptionText: transcript,
         };
@@ -100,7 +100,7 @@ exports.handler = async function handler(context, event, callback) {
         console.log('transcription: agent: ', event.TranscriptionData);
         const transcript = JSON.parse(event.TranscriptionData).transcript;
         const syncStreamOutboundData = {
-          actor: 'Outbound',
+          actor: 'outbound',
           type: 'transcript',
           transcriptionText: transcript,
         };
