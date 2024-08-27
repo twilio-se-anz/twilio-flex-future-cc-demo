@@ -1,4 +1,5 @@
 const { OpenAI } = require('openai');
+const { isString, isObject, isNumber } = require('lodash');
 
 const SyncOperations = require(Runtime.getFunctions()['common/twilio-wrappers/sync'].path);
 exports.handler = async function handler(context, event, callback) {
@@ -34,7 +35,7 @@ exports.handler = async function handler(context, event, callback) {
         context,
         mapSid: context.MAP_CALL_LOG,
         key: event.CallSid,
-        ttl: parseInt(context.TWILIO_TRANSCRIPTON_SYNC_TTL, 10),
+        ttl: parseInt(context.TWILIO_TRANSCRIPTION_SYNC_TTL, 10),
         syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
         data: { syncStream: syncStreamResult.stream.sid },
       });
@@ -47,11 +48,11 @@ exports.handler = async function handler(context, event, callback) {
         const syncStreamInboundData = {
           actor: 'Inbound',
           type: 'transcript',
-          taranscriptionText: transcript,
+          transcriptionText: transcript,
         };
         const streamMessageInboundResult = await SyncOperations.createStreamMessage({
           context,
-          name: `FLEX_ASSIST_${event.CallSid}`,
+          name: `TRANSCRIPTION_${event.CallSid}`,
           data: syncStreamInboundData,
           syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
         });
@@ -83,7 +84,7 @@ exports.handler = async function handler(context, event, callback) {
             };
             const streamMessageAIResult = await SyncOperations.createStreamMessage({
               context,
-              name: `FLEX_ASSIST_${event.CallSid}`,
+              name: `TRANSCRIPTION_${event.CallSid}`,
               data: syncStreamAIData,
               syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
             });
@@ -101,11 +102,11 @@ exports.handler = async function handler(context, event, callback) {
         const syncStreamOutboundData = {
           actor: 'Outbound',
           type: 'transcript',
-          taranscriptionText: transcript,
+          transcriptionText: transcript,
         };
         const streamMessageOutboundResult = await SyncOperations.createStreamMessage({
           context,
-          name: `FLEX_ASSIST_${event.CallSid}`,
+          name: `TRANSCRIPTION_${event.CallSid}`,
           data: syncStreamOutboundData,
           syncServiceSid: context.TWILIO_FLEX_SYNC_SID,
         });
