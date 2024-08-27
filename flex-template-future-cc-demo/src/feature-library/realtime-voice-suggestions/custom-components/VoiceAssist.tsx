@@ -4,25 +4,25 @@ import {
   ChatMessage,
   ChatMessageMeta,
   ChatMessageMetaItem,
-  SkeletonLoader,
-  Box,
   ChatBookend,
   ChatBookendItem,
-  TextArea,
-  Label,
-  Text,
-  Stack,
-  Tooltip,
-  Avatar,
-} from '@twilio-paste/core';
-import * as Flex from '@twilio/flex-ui';
+} from '@twilio-paste/core/chat-log';
+import { SkeletonLoader } from '@twilio-paste/core/skeleton-loader';
+import { Box } from '@twilio-paste/core/box';
+import { TextArea } from '@twilio-paste/core/textarea';
+import { Label } from '@twilio-paste/core/label';
+import { Text } from '@twilio-paste/core/text';
+import { Stack } from '@twilio-paste/core/stack';
+import { Tooltip } from '@twilio-paste/core/tooltip';
+import { Avatar } from '@twilio-paste/core/avatar';
 import { useEffect, useState } from 'react';
+import { UserIcon } from '@twilio-paste/icons/esm/UserIcon';
+import { AgentIcon } from '@twilio-paste/icons/esm/AgentIcon';
+import { Task } from 'types/task-router';
+
 import client from '../../../utils/sdk-clients/sync/SyncClient';
 import { TranscriptTurn } from '../types/VoiceAssistTypes';
 import AiSuggestion from './AiSuggestions';
-import { Task } from 'types/task-router';
-import { UserIcon } from '@twilio-paste/icons/esm/UserIcon';
-import { AgentIcon } from '@twilio-paste/icons/esm/AgentIcon';
 
 export type VoiceAssistTabProps = {
   props: {
@@ -39,10 +39,6 @@ const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
   const [loading, setLoading] = useState(true);
   const [transcript, setTranscript] = useState<TranscriptTurn[]>([]);
   const [intermediateResult, setIntermediateResult] = useState<string>('');
-
-  // const syncClient = useSyncClient(Flex.Manager.getInstance().user.identity);
-  let stream: any; // twilio-sync does not export the SyncStream type
-
   useEffect(() => {
     if (props.task && props.task.taskChannelUniqueName === 'voice') {
       // This is a voice task, you can access the CallSid from task attributes
@@ -50,13 +46,13 @@ const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
       console.log('Using this CallSid for stream connection:', callSid);
 
       try {
-        client.stream('FLEX_ASSIST_' + callSid).then((stream: any) => {
+        client.stream(`FLEX_ASSIST_${callSid}`).then((stream: any) => {
           setLoading(false);
           console.log('Access to stream:', stream);
           stream.on('messagePublished', (event: SyncStreamEvent) => {
             const words = event?.message?.data.text;
             console.log(`Speech server (${event.message.data.track}) >> `, words);
-            if (event?.message?.data.isFinal == true) {
+            if (event?.message?.data.isFinal === true) {
               console.log('Adding to transcript', words);
               setTranscript((transcript) => [...transcript, { message: words, direction: event.message.data.track }]);
             } else {
@@ -89,7 +85,6 @@ const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
             Caller transcript
           </Label>
           <TextArea
-            onChange={() => {}}
             id="caller_text"
             name="caller_text"
             insertBefore={
@@ -137,9 +132,9 @@ const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
                           <Avatar
                             name={item.direction}
                             size="sizeIcon20"
-                            icon={item.direction == 'inbound' ? UserIcon : AgentIcon}
+                            icon={item.direction === 'inbound' ? UserIcon : AgentIcon}
                           />
-                          {item.direction == 'inbound' ? 'Customer' : 'You'}
+                          {item.direction === 'inbound' ? 'Customer' : 'You'}
                         </ChatMessageMetaItem>
                       </Tooltip>
                     </ChatMessageMeta>
