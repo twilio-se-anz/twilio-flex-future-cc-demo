@@ -23,8 +23,10 @@ const mockedUiAttributes: UIAttributes = {
     serverless_functions_protocol: 'https',
     serverless_functions_port: '443',
     serverless_functions_domain_future_cc_demo: 'mockServerlessFunctionsDomain',
+    serverless_functions_port_future_cc_demo: '443',
     language: 'default',
     features: {},
+    common: {},
   },
 };
 

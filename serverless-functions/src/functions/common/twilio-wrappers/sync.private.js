@@ -40,22 +40,25 @@ exports.createMap = async function createMap(parameters) {
  * @param {object} parameters.context the context from calling lambda function
  * @param {string} parameters.mapSid the SID of the Sync Map
  * @param {string} parameters.key the key of the Sync Map item
+ * @param {string} parameters.syncServiceSid the sid of the Sync service 
  * @returns {object} success
  * @description the following method is used to remove a Sync Map Item
  */
 exports.deleteMapItem = async function deleteMapItem(parameters) {
-  const { context, mapSid, key } = parameters;
+  const { context, mapSid, key, syncServiceSid } = parameters;
 
   if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (Boolean(mapSid) && !isString(mapSid))
     throw new Error('Invalid parameters object passed. Parameters must contain mapSid string value');
   if (Boolean(key) && !isString(key))
     throw new Error('Invalid parameters object passed. Parameters must contain key string value');
+  if (Boolean(syncServiceSid) && !isString(syncServiceSid))
+    throw new Error('Invalid parameters object passed. Parameters must contain sync stream string value');
 
   try {
     const client = context.getTwilioClient();
 
-    await client.sync.services(context.TWILIO_FLEX_SYNC_SID).syncMaps(mapSid).syncMapItems(key).remove();
+    await client.sync.v1.services(syncServiceSid).syncMaps(mapSid).syncMapItems(key).remove();
 
     return { success: true, status: 200 };
   } catch (error) {
@@ -69,23 +72,26 @@ exports.deleteMapItem = async function deleteMapItem(parameters) {
  * @param {object} parameters.context the context from calling lambda function
  * @param {string} parameters.mapSid the SID of the Sync Map
  * @param {string} parameters.key the key of the Sync Map item
+ * @param {string} parameters.syncServiceSid the sid of the Sync service 
  * @returns {object} An existing Sync Map Item
  * @description the following method is used to fetch a Sync Map Item
  */
 exports.fetchMapItem = async function fetchMapItem(parameters) {
-  const { context, mapSid, key } = parameters;
+  const { context, mapSid, key, syncServiceSid } = parameters;
 
   if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (Boolean(mapSid) && !isString(mapSid))
     throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (Boolean(key) && !isString(key))
     throw new Error('Invalid parameters object passed. Parameters must contain uniqueName string value');
+  if (Boolean(syncServiceSid) && !isString(syncServiceSid))
+    throw new Error('Invalid parameters object passed. Parameters must contain sync stream string value');
 
   try {
     const client = context.getTwilioClient();
 
     const mapItem = await client.sync.v1
-      .services(context.TWILIO_FLEX_SYNC_SID)
+      .services(syncServiceSid)
       .syncMaps(mapSid)
       .syncMapItems(key)
       .fetch();
@@ -104,11 +110,12 @@ exports.fetchMapItem = async function fetchMapItem(parameters) {
  * @param {string} parameters.key the key of the Sync Map item
  * @param {number} parameters.ttl how long (in seconds) before the Sync item expires and is deleted (optional)
  * @param {object} parameters.data schema-less object that the Sync Map item stores - 16 KiB max (optional)
+ * @param {string} parameters.syncServiceSid the sid of the Sync service 
  * @returns {object} A new Sync Map Item
  * @description the following method is used to create a Sync Map Item
  */
 exports.createMapItem = async function createMapItem(parameters) {
-  const { context, mapSid, key, ttl, data } = parameters;
+  const { context, mapSid, key, ttl, data, syncServiceSid } = parameters;
 
   if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (Boolean(mapSid) && !isString(mapSid))
@@ -119,6 +126,8 @@ exports.createMapItem = async function createMapItem(parameters) {
     throw new Error('Invalid parameters object passed. Parameters must contain ttl number value');
   if (Boolean(data) && !isObject(data))
     throw new Error('Invalid parameters object passed. Parameters must contain data object');
+  if (Boolean(syncServiceSid) && !isString(syncServiceSid))
+    throw new Error('Invalid parameters object passed. Parameters must contain sync stream string value');
 
   try {
     const client = context.getTwilioClient();
@@ -129,7 +138,7 @@ exports.createMapItem = async function createMapItem(parameters) {
     };
 
     const mapItem = await client.sync.v1
-      .services(context.TWILIO_FLEX_SYNC_SID)
+      .services(syncServiceSid)
       .syncMaps(mapSid)
       .syncMapItems.create(mapItemParameters);
 
@@ -231,5 +240,95 @@ exports.updateDocumentData = async function updateDocumentData(parameters) {
     return { success: true, status: 200, document: documentUpdate };
   } catch (error) {
     return retryHandler(error, parameters, exports.updateDocumentData);
+  }
+};
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.name the sid of the Sync stream 
+ * @param {string} parameters.syncServiceSid the sid of the Sync service 
+ * @returns {object} A Sync document
+ * @description the following method is used to fetch a sync document
+ */
+exports.createStream = async function createStream(parameters) {
+  const { context, name, syncServiceSid } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(name))
+    throw new Error('Invalid parameters object passed. Parameters must contain name of stream string value');
+  if (!isString(syncServiceSid))
+    throw new Error('Invalid parameters object passed. Parameters must contain sync stream string value');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const stream = await client.sync.v1.services(syncServiceSid).syncStreams.create({ 'uniqueName': name, 'ttl': 86400 });
+
+    return { success: true, status: 200, stream };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.createStream);
+  }
+};
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.name the sid of the Sync stream 
+ * @param {string} parameters.syncServiceSid the sid of the Sync service 
+ * @returns {object} A Sync document
+ * @description the following method is used to fetch a sync document
+ */
+exports.deleteStream = async function deleteStream(parameters) {
+  const { context, name, syncServiceSid } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(name))
+    throw new Error('Invalid parameters object passed. Parameters must contain name of stream string value');
+  if (!isString(syncServiceSid))
+    throw new Error('Invalid parameters object passed. Parameters must contain sync stream string value');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const stream = await client.sync.v1.services(syncServiceSid).syncStreams(name).remove();
+
+    return { success: true, status: 200, stream };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.deleteStream);
+  }
+};
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.name the sid of the Sync stream name
+ * @param {object} parameters.data A Sync stream message data
+ * @param {string} parameters.syncServiceSid the sid of the Sync service 
+ * @returns {object} A Sync stream
+ * @description the following method is used to fetch a sync document
+ */
+exports.createStreamMessage = async function createStreamMessage(parameters) {
+  const { context, name, data, syncServiceSid } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(name))
+    throw new Error('Invalid parameters object passed. Parameters must contain name of stream string value');
+  if (!isObject(data))
+    throw new Error('Invalid parameters object passed. Parameters must contain data object');
+  if (!isString(syncServiceSid))
+    throw new Error('Invalid parameters object passed. Parameters must contain sync stream string value');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const stream = await client.sync.v1.services(syncServiceSid).syncStreams(name).streamMessages.create({ data });;
+
+    return { success: true, status: 200, stream };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.createStreamMessage);
   }
 };

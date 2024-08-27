@@ -1,4 +1,4 @@
-import { Card, SkeletonLoader, Heading, Paragraph, Stack, Badge } from '@twilio-paste/core';
+import { Stack, Badge } from '@twilio-paste/core';
 import { useEffect, useState } from 'react';
 import { withTaskContext } from '@twilio/flex-ui';
 import { AiSuggestion, TranscriptTurn } from '../types/VoiceAssistTypes';
@@ -9,7 +9,7 @@ export interface AiSuggestionProps {
   transcript: TranscriptTurn[];
 }
 
-const VoiceAssist: React.FC<AiSuggestionProps> = (props: AiSuggestionProps) => {
+const AiSuggestions: React.FC<AiSuggestionProps> = (props: AiSuggestionProps) => {
   const [blocking, setBlocking] = useState(false);
   const [loading, setLoading] = useState(true);
   const [suggestions, setSuggestions] = useState<AiSuggestion[]>();
@@ -60,10 +60,10 @@ const VoiceAssist: React.FC<AiSuggestionProps> = (props: AiSuggestionProps) => {
       </Stack>
       {suggestions === null || (Object.hasOwn(suggestions, 'map') && <></>)}
       {suggestions.map((item: AiSuggestion, idx: number) => (
-        <SuggestionCard suggestion={item} />
+        <SuggestionCard suggestion={item} key={`ai-suggestion-${idx}`} />
       ))}
     </Stack>
   );
 };
 
-export default withTaskContext(VoiceAssist);
+export default withTaskContext(AiSuggestions);

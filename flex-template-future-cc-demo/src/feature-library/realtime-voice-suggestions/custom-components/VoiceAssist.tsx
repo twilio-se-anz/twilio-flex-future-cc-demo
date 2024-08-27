@@ -2,6 +2,8 @@ import {
   ChatBubble,
   ChatLog,
   ChatMessage,
+  ChatMessageMeta,
+  ChatMessageMetaItem,
   SkeletonLoader,
   Box,
   ChatBookend,
@@ -10,26 +12,30 @@ import {
   Label,
   Text,
   Stack,
+  Tooltip,
+  Avatar,
 } from '@twilio-paste/core';
+import * as Flex from '@twilio/flex-ui';
 import { useEffect, useState } from 'react';
-import { withTaskContext } from '@twilio/flex-ui';
-
 import client from '../../../utils/sdk-clients/sync/SyncClient';
 import { TranscriptTurn } from '../types/VoiceAssistTypes';
 import AiSuggestion from './AiSuggestions';
+import { Task } from 'types/task-router';
+import { UserIcon } from '@twilio-paste/icons/esm/UserIcon';
+import { AgentIcon } from '@twilio-paste/icons/esm/AgentIcon';
 
-// import useSyncClient from '../services/SyncClientHelper';
-
-export interface CallTranscriptProps {
-  task: any;
-}
+export type VoiceAssistTabProps = {
+  props: {
+    task?: Task;
+  };
+};
 
 export type SyncStreamEvent = {
   message: any; // twilio-sync does not export the StreamMessage type
   isLocal: boolean;
 };
 
-const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) => {
+const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
   const [loading, setLoading] = useState(true);
   const [transcript, setTranscript] = useState<TranscriptTurn[]>([]);
   const [intermediateResult, setIntermediateResult] = useState<string>('');
@@ -48,10 +54,8 @@ const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) 
           setLoading(false);
           console.log('Access to stream:', stream);
           stream.on('messagePublished', (event: SyncStreamEvent) => {
-            console.log('*** NEW MSG', event);
-
             const words = event?.message?.data.text;
-
+            console.log(`Speech server (${event.message.data.track}) >> `, words);
             if (event?.message?.data.isFinal == true) {
               console.log('Adding to transcript', words);
               setTranscript((transcript) => [...transcript, { message: words, direction: event.message.data.track }]);
@@ -78,7 +82,7 @@ const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) 
     );
 
   return (
-    <Box width={'100%'} overflow="scroll" inset={undefined} padding={'space40'}>
+    <Box width={'100%'} overflow="scroll" inset={undefined} padding={'space40'} backgroundColor={'colorBackgroundBody'}>
       <Stack orientation={'vertical'} spacing={'space40'}>
         <>
           <Label htmlFor="caller_text" required>
@@ -127,6 +131,18 @@ const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) 
                 >
                   <ChatMessage variant={item.direction}>
                     <ChatBubble>{item.message}</ChatBubble>
+                    <ChatMessageMeta aria-label={item.direction}>
+                      <Tooltip text={item.direction}>
+                        <ChatMessageMetaItem>
+                          <Avatar
+                            name={item.direction}
+                            size="sizeIcon20"
+                            icon={item.direction == 'inbound' ? UserIcon : AgentIcon}
+                          />
+                          {item.direction == 'inbound' ? 'Customer' : 'You'}
+                        </ChatMessageMetaItem>
+                      </Tooltip>
+                    </ChatMessageMeta>
                   </ChatMessage>
                 </Box>
               );
@@ -137,4 +153,4 @@ const VoiceAssist: React.FC<CallTranscriptProps> = (props: CallTranscriptProps) 
   );
 };
 
-export default withTaskContext(VoiceAssist);
+export default VoiceAssistTab;

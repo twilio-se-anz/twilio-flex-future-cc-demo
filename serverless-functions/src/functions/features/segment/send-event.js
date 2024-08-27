@@ -1,14 +1,9 @@
 const fetch = require('node-fetch');
 
-export const handler = async function (context, event, callback) {
-  const response = new Twilio.Response();
-  // Set the CORS headers to allow Flex to make an error-free HTTP request
-  // to this Function
-  response.appendHeader('Access-Control-Allow-Origin', '*');
-  response.appendHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
-  response.appendHeader('Access-Control-Allow-Headers', 'Content-Type');
-  response.appendHeader('Content-Type', 'application/json');
+const { prepareStudioFunction } = require(Runtime.getFunctions()['common/helpers/function-helper'].path);
+const requiredParameters = ['userId'];
 
+exports.handler = prepareStudioFunction(requiredParameters, async (context, event, callback, response, handleError) => {
   try {
     if (!context.SEGMENT_WRITE_KEY) {
       response.setBody({ error: 'Write key not set' });
@@ -52,10 +47,8 @@ export const handler = async function (context, event, callback) {
     const responseData = await segmentResponse.json();
     response.setBody({ message: 'accepted', ...responseData });
 
-    callback(null, response);
+    return callback(null, response);
   } catch (error) {
-    console.log(error);
-    response.setBody(error);
-    callback(response);
+    return handleError(error);
   }
-};
+});

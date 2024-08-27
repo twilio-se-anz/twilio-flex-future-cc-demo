@@ -68,7 +68,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
       - name: set github environment variables
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -118,7 +118,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
       - name: set github environment variables
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -152,10 +152,6 @@ jobs:
       - name: deploy serverless
         working-directory: serverless-functions
         run: |
-          ls -al src
-          ls -al src/assets
-          ls -al src/assets/features
-          ls -al src/assets/features/future-cc
           npm run install-serverless-plugin
           npm run deploy-env
 
@@ -176,7 +172,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
       - name: set github environment variables
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
@@ -209,7 +205,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: install twilio cli
         run: npm install --ignore-scripts
