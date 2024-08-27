@@ -1,4 +1,6 @@
-import { Callout, CalloutHeading, CalloutText, Text } from '@twilio-paste/core';
+import { Callout, CalloutHeading, CalloutText } from '@twilio-paste/core/callout';
+import { Text } from '@twilio-paste/core/text';
+
 import { AiSuggestion } from '../types/VoiceAssistTypes';
 
 export interface SuggestionCardProps {
