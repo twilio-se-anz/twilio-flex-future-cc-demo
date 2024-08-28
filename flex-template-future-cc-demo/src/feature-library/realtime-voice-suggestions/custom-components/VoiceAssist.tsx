@@ -43,7 +43,7 @@ const VoiceAssist: React.FC<VoiceAssistProps> = ({ client, callSid }) => {
     const performAnalysis = () => {
       console.log('Performing analysis on transcript');
 
-      fetch(`${BASE_URL}/api/perform-analysis`, {
+      fetch(`${BASE_URL}/features/realtime-voice-transcriptions/perform-analysis`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
