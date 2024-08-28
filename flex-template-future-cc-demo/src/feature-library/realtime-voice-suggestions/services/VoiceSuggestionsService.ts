@@ -8,6 +8,10 @@ export interface VoiceSuggestionsResponse {
 }
 
 class VoiceSuggestionsService extends ApiService {
+  getAPIBaseUri = () => {
+    return `${this.serverlessProtocol}://${this.serverlessDomain}`;
+  };
+
   getSuggestions = async (language: string, transcript: Array<TranscriptTurn>): Promise<VoiceSuggestionsResponse> => {
     return new Promise((resolve, reject) => {
       const encodedParams: EncodedParams = {

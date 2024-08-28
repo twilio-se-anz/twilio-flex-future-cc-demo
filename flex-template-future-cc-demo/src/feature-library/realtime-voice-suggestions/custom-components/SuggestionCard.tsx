@@ -1,5 +1,5 @@
+import React from 'react';
 import { Callout, CalloutHeading, CalloutText } from '@twilio-paste/core/callout';
-import { Text } from '@twilio-paste/core/text';
 
 import { AiSuggestion } from '../types/VoiceAssistTypes';
 
@@ -10,11 +10,7 @@ export interface SuggestionCardProps {
 const SuggestionCard: React.FC<SuggestionCardProps> = (props: SuggestionCardProps) => {
   return (
     <Callout variant="new">
-      <CalloutHeading as="h2">
-        <Text as={'h2'} fontWeight={'fontWeightBold'}>
-          {props.suggestion.title}
-        </Text>
-      </CalloutHeading>
+      <CalloutHeading as="h2">{props.suggestion.title}</CalloutHeading>
       <CalloutText>{props.suggestion.suggestion}</CalloutText>
     </Callout>
   );

@@ -2,6 +2,7 @@ import { Stack } from '@twilio-paste/core/stack';
 import { Task } from 'types/task-router';
 import { Alert } from '@twilio-paste/core/alert';
 
+import client from '../../../utils/sdk-clients/sync/SyncClient';
 import VoiceAssist from './VoiceAssist';
 
 export type VoiceAssistTabProps = {
@@ -20,7 +21,7 @@ const VoiceAssistTab: React.FC<VoiceAssistTabProps> = ({ props }) => {
       </Stack>
     );
 
-  return <VoiceAssist callSid={props.task.attributes.call_sid} />;
+  return <VoiceAssist client={client} callSid={props.task.attributes.call_sid} />;
 };
 
 export default VoiceAssistTab;
