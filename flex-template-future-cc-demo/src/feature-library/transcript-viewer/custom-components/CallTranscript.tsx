@@ -34,7 +34,7 @@ const CallTranscript: React.FC<CallTranscriptProps> = (props: CallTranscriptProp
       .then((transcript) => setTranscript(transcript))
       .catch((err) => console.log(`Error fetching transcript`, err))
       .finally(() => setLoading(false));
-  }, [props.task?.attributes.conference.participants.customer]);
+  }, [props.task?.attributes]);
 
   if (loading)
     return (
