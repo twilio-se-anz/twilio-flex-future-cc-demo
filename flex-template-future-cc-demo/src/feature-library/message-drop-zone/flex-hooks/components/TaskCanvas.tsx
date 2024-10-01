@@ -1,5 +1,6 @@
 import * as Flex from '@twilio/flex-ui';
 import React from 'react';
+
 import { MessageDropZoneWrapper } from '../../custom-components/MessageDropZone/MessageDropZoneWrapper';
 import { FlexComponent } from '../../../../types/feature-loader';
 
@@ -8,7 +9,7 @@ export const componentHook = function wrapTaskCanvasComponent(flex: typeof Flex,
   flex.TaskCanvas.Content.addWrapper((OriginalComponent) => (originalProps) => {
     return (
       <MessageDropZoneWrapper>
-        <OriginalComponent {...originalProps} />
+        <OriginalComponent {...(originalProps as any)} />
       </MessageDropZoneWrapper>
     );
   });

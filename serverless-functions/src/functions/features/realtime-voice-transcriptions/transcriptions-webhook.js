@@ -91,9 +91,9 @@ exports.handler = async function handler(context, event, callback) {
     }
 
     response.setStatusCode(200);
-    callback(null, response);
+    return callback(null, response);
   } catch (err) {
     console.error('Error', err);
-    callback(err, null);
+    return callback(err, null);
   }
 };

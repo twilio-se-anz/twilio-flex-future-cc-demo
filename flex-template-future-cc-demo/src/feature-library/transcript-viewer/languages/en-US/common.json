@@ -1,0 +1,52 @@
+{
+  "log": {
+    "lookup-data": "Looking up data for",
+    "lookup-response": "Response from API",
+    "lookup-callsid-start": "Looking up data for callSid",
+    "lookup-callsid-response": "Response from API transcript/retrieve",
+    "transcription-length": "Transcript length",
+    "error-api-data": "Error getting API data",
+    "lookup-target-number": "Looking data for target To number",
+    "lookup-answerpoint-response": "Response from API answerPoint",
+    "error-api-answerpoint": "Error getting API data for answerPoint"
+  },
+  "page": {
+    "title": "Twilio"
+  },
+  "tabs": {
+    "virtual-agent-data": "Virtual Agent Data",
+    "label1": "Customer Information",
+    "label2": "Answer Point",
+    "label3": "Location"
+  },
+  "labels": {
+    "attached-data": "Enquiry Information",
+    "json-data": "Passed Data"
+  },
+  "word": {
+    "unknown": "Unknown",
+    "id": "ID:"
+  },
+  "table": {
+    "attribute": "Attribute",
+    "value": "Value"
+  },
+  "transcript": {
+    "customer": "Customer",
+    "bot-name": "Dialog Flow",
+    "transcript-start": "start of voice transcript",
+    "said-by-customer": "said by Customer",
+    "said-by-bot": "said by Bot",
+    "end-message": "Dialog Flow Ended"
+  },
+  "error": {
+    "no-va-data": "No virtual agent handoff data.",
+    "no-va-data-description": "This may occur if the call didn't use a Virtual Agent or the Studio flow didn't pass any AgentHandoffParameters data"
+  },
+  "sentiment": {
+    "positive": "Positive",
+    "neutral": "Neutral",
+    "poor": "Poor",
+    "negative": "Negative"
+  }
+}
