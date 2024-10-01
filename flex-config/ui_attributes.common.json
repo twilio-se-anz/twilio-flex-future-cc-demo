@@ -32,6 +32,9 @@
       },
       "webrtc_support": {
         "enabled": true
+      },
+      "transcript_viewer": {
+        "enabled": false
       }
     }
   }

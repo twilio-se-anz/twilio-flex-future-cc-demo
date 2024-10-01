@@ -1,6 +1,7 @@
-import { Stack, Badge } from '@twilio-paste/core';
+import { Badge } from '@twilio-paste/core/badge';
+import { Stack } from '@twilio-paste/core/stack';
 import { useEffect, useState } from 'react';
-import { withTaskContext } from '@twilio/flex-ui';
+
 import { AiSuggestion, TranscriptTurn } from '../types/VoiceAssistTypes';
 import VoiceSuggestionsService from '../services/VoiceSuggestionsService';
 import SuggestionCard from './SuggestionCard';
@@ -35,7 +36,7 @@ const AiSuggestions: React.FC<AiSuggestionProps> = (props: AiSuggestionProps) =>
     setLoading(true);
     VoiceSuggestionsService.getSuggestions('en', props.transcript)
       .then((ai_suggestion) => {
-        if (ai_suggestion.success == true && ai_suggestion.suggestions.length > 0)
+        if (ai_suggestion.success === true && ai_suggestion.suggestions.length > 0)
           setSuggestions(ai_suggestion.suggestions);
       })
       .catch((err) => console.warn('Error getting voice AI suggestion', err))
@@ -66,4 +67,4 @@ const AiSuggestions: React.FC<AiSuggestionProps> = (props: AiSuggestionProps) =>
   );
 };
 
-export default withTaskContext(AiSuggestions);
+export default AiSuggestions;

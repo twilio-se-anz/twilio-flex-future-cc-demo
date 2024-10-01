@@ -1,0 +1,45 @@
+{
+  "log": {
+    "lookup-data": "データの検索",
+    "lookup-response": "API からの応答",
+    "lookup-callsid-start": "callSid のデータの検索",
+    "lookup-callsid-response": "API トランスクリプトからの応答/取得",
+    "transcription-length": "トランスクリプトの長さ",
+    "error-api-data": "API データの取得中にエラーが発生しました",
+    "lookup-target-number": "対象の To 番号の検索データ",
+    "lookup-answerpoint-response": "API answerPoint からの応答",
+    "error-api-answerpoint": "Answer Point の API データの取得中にエラーが発生しました"
+  },
+  "page": {
+    "title": "Twilio"
+  },
+  "tabs": {
+    "label1": "顧客情報",
+    "label2": "FAQ",
+    "label3": "場所"
+  },
+  "labels": {
+    "attached-data": "お問い合わせ内容",
+    "json-data": "取得データ"
+  },
+  "word": {
+    "unknown": "不明",
+    "id": "ID:"
+  },
+  "table": {
+    "attribute": "属性",
+    "value": "値"
+  },
+  "transcript": {
+    "customer": "お客様",
+    "bot-name": "ボット",
+    "transcript-start": "との会話開始",
+    "said-by-customer": "お客様側",
+    "said-by-bot": "ボット側",
+    "end-message": "ボットとの会話終了"
+  },
+  "error": {
+    "no-va-data": "バーチャルエージェントデータがありません。",
+    "no-va-data-description": "バーチャルエージェントが応答無し、またはStudioフローがデータを渡していない可能性があります。"
+  }
+}

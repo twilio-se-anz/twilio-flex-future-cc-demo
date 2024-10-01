@@ -1,35 +1,29 @@
 import { EncodedParams } from '../../../types/serverless';
 import ApiService from '../../../utils/serverless/ApiService';
-import { AiSuggestion, TranscriptTurn } from '../types/VoiceAssistTypes';
+import { TranscriptListItem } from '../types/TranscriptViewer';
 
-export interface VoiceSuggestionsResponse {
-  success: boolean;
-  suggestions: AiSuggestion[];
-}
-
-class VoiceSuggestionsService extends ApiService {
+class TranscriptService extends ApiService {
   getAPIBaseUri = () => {
     return `${this.serverlessProtocol}://${this.serverlessDomain}`;
   };
 
-  getSuggestions = async (language: string, transcript: Array<TranscriptTurn>): Promise<VoiceSuggestionsResponse> => {
+  getTranscript = async (CallSid: string): Promise<TranscriptListItem[]> => {
     return new Promise((resolve, reject) => {
       const encodedParams: EncodedParams = {
-        language: encodeURIComponent(language),
-        transcript: encodeURIComponent(JSON.stringify(transcript)),
+        CallSid,
         Token: encodeURIComponent(this.manager.user.token),
       };
 
       // `${this.serverlessProtocol}://${this.serverlessDomain}/features/realtime-voice-suggestions/flex/ai-suggestion`,
-      this.fetchJsonWithReject<VoiceSuggestionsResponse>(
-        `${this.serverlessProtocol}://${this.serverlessDomain}/features/realtime-voice-suggestions/flex/ai-suggestion`,
+      this.fetchJsonWithReject<TranscriptListItem[]>(
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/transcript-viewer/flex/transcript`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: this.buildBody(encodedParams),
         },
       )
-        .then((resp: VoiceSuggestionsResponse) => {
+        .then((resp: TranscriptListItem[]) => {
           resolve(resp);
         })
         .catch((error) => {
@@ -40,4 +34,4 @@ class VoiceSuggestionsService extends ApiService {
   };
 }
 
-export default new VoiceSuggestionsService();
+export default new TranscriptService();

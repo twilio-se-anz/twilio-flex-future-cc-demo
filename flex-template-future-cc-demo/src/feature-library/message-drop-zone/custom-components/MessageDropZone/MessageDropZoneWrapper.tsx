@@ -1,9 +1,11 @@
 import React, { DragEvent, useState } from 'react';
-import { withTaskContext, ITask, Actions, Icon } from '@twilio/flex-ui';
-import { Box, Heading, Paragraph } from '@twilio-paste/core';
+import { withTaskContext, ITask, Actions } from '@twilio/flex-ui';
+import { Box } from '@twilio-paste/core/box';
+import { Heading } from '@twilio-paste/core/heading';
+import { Paragraph } from '@twilio-paste/core/paragraph';
 import { MMSCapableIcon } from '@twilio-paste/icons/esm/MMSCapableIcon';
 
-type Props = { children: React.ReactNode; task: ITask };
+type Props = { children: any; task: ITask };
 
 const Wrapper = (props: Props) => {
   const { children } = props;
