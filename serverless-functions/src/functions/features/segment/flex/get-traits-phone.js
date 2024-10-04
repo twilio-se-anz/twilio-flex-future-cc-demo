@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 const { prepareFlexFunction } = require(Runtime.getFunctions()['common/helpers/function-helper'].path);
-const requiredParameters = ['userId'];
+const requiredParameters = ['From'];
 
 exports.handler = prepareFlexFunction(requiredParameters, async (context, event, callback, response, handleError) => {
   try {

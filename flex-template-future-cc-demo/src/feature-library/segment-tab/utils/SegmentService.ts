@@ -6,6 +6,7 @@ import { EventResponse } from '../types/Segment/EventResponse';
 
 class SegmentService extends ApiService {
   userTraitsCache: Record<string, SegmentTraits> = {};
+
   userEventsCache: Record<string, EventResponse[]> = {};
 
   fetchTraitsForUser = async (userId: string): Promise<SegmentTraits> => {
@@ -17,9 +18,7 @@ class SegmentService extends ApiService {
 
       const encodedParams: EncodedParams = {
         userId,
-        Token: encodeURIComponent(
-          this.manager.store.getState().flex.session.ssoTokenPayload.token
-        ),
+        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
       };
 
       this.fetchJsonWithReject<SegmentTraits>(
@@ -28,17 +27,45 @@ class SegmentService extends ApiService {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: this.buildBody(encodedParams),
-        }
+        },
       )
         .then((response) => {
           this.userTraitsCache[userId] = response;
           resolve(response);
         })
         .catch((error) => {
-          console.error(
-            `Segment Service - Error fetching traits for user: \r\n`,
-            error
-          );
+          console.error(`Segment Service - Error fetching traits for user: \r\n`, error);
+          reject(error);
+        });
+    });
+  };
+
+  fetchTraitsForUserByPhone = async (phone: string): Promise<SegmentTraits> => {
+    return new Promise((resolve, reject) => {
+      if (this.userTraitsCache[phone]) {
+        resolve(this.userTraitsCache[phone]);
+        return;
+      }
+
+      const encodedParams: EncodedParams = {
+        From: encodeURIComponent(phone),
+        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
+      };
+
+      this.fetchJsonWithReject<SegmentTraits>(
+        `${this.serverlessProtocol}://${this.serverlessDomain}/features/segment/flex/get-traits-phone`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: this.buildBody(encodedParams),
+        },
+      )
+        .then((response) => {
+          this.userTraitsCache[phone] = response;
+          resolve(response);
+        })
+        .catch((error) => {
+          console.error(`Segment Service - Error fetching traits for user by phone: \r\n`, error);
           reject(error);
         });
     });
@@ -53,9 +80,7 @@ class SegmentService extends ApiService {
 
       const encodedParams: EncodedParams = {
         userId,
-        Token: encodeURIComponent(
-          this.manager.store.getState().flex.session.ssoTokenPayload.token
-        ),
+        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
       };
 
       this.fetchJsonWithReject<EventResponse[]>(
@@ -64,7 +89,7 @@ class SegmentService extends ApiService {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: this.buildBody(encodedParams),
-        }
+        },
       )
         .then((response) => {
           this.userEventsCache[userId] = response;
@@ -80,9 +105,7 @@ class SegmentService extends ApiService {
   sendToSegment = async (data: SegmentTrackData): Promise<any> => {
     return new Promise((resolve, reject) => {
       const encodedParams: EncodedParams = {
-        Token: encodeURIComponent(
-          this.manager.store.getState().flex.session.ssoTokenPayload.token
-        ),
+        Token: encodeURIComponent(this.manager.store.getState().flex.session.ssoTokenPayload.token),
       };
 
       this.fetchJsonWithReject<EventResponse[]>(
@@ -93,7 +116,7 @@ class SegmentService extends ApiService {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        }
+        },
       )
         .then((response) => {
           resolve(response);

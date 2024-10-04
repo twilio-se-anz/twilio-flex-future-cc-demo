@@ -12,7 +12,7 @@ import TraitTags from './TraitTags';
 type SegmentViewProps = {
   props: {
     task?: any;
-  }
+  };
 };
 
 const SegmentView = ({ props }: SegmentViewProps) => {
@@ -23,28 +23,36 @@ const SegmentView = ({ props }: SegmentViewProps) => {
   const [traits, setTraits] = useState<SegmentTraits>({});
   const [events, setEvents] = useState<EventResponse[]>([]);
 
-
   useEffect(() => {
     setLoadingTraits(true);
     setLoadingEvents(true);
 
-    SegmentService.fetchTraitsForUser(
-      props.task.attributes.email ||
-      props.task.attributes?.customers?.email ||
-      props.task.attributes?.pre_engagement_data?.email,
-    )
-      .then((userTraits) => setTraits(userTraits))
-      .catch((err) => console.error('Segment view - Error fetching user traits', err))
-      .finally(() => setLoadingTraits(false));
+    const phone: string = props.task.attributes.From || props.task.attributes.from;
+    if (phone && phone !== '')
+      SegmentService.fetchTraitsForUserByPhone(phone)
+        .then((userTraits) => setTraits(userTraits))
+        .catch((err) => console.error('Segment view - Error fetching user traits by phone', err))
+        .finally(() => setLoadingTraits(false));
 
-    SegmentService.fetchEventsForUser(
+    const email: string =
       props.task.attributes.email ||
       props.task.attributes?.customers?.email ||
-      props.task.attributes?.pre_engagement_data?.email,
-    )
-      .then((events) => setEvents(events))
-      .catch((err) => console.log('Segment view - Error getting events', err))
-      .finally(() => setLoadingEvents(false));
+      props.task.attributes?.pre_engagement_data?.email;
+    if (email && email !== '') {
+      SegmentService.fetchTraitsForUser(email)
+        .then((userTraits) => setTraits(userTraits))
+        .catch((err) => console.error('Segment view - Error fetching user traits by userId', err))
+        .finally(() => setLoadingTraits(false));
+
+      SegmentService.fetchEventsForUser(
+        props.task.attributes.email ||
+          props.task.attributes?.customers?.email ||
+          props.task.attributes?.pre_engagement_data?.email,
+      )
+        .then((events) => setEvents(events))
+        .catch((err) => console.log('Segment view - Error getting events by userId', err))
+        .finally(() => setLoadingEvents(false));
+    }
   }, [
     props.task?.attributes?.email,
     props.task?.attributes?.customers?.email,

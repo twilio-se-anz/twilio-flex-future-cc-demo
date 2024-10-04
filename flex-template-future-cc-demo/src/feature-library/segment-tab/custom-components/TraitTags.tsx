@@ -16,6 +16,7 @@ const makeBadges = (traits: any) => {
 
   console.log(`Evaluating traits`, traits);
 
+  // Known Traits
   KnownTraits.forEach((item) => {
     console.log(`Evaluating know trait against ${item.key} `);
     if (traits && traits.hasOwnProperty(item.key)) {
@@ -25,6 +26,7 @@ const makeBadges = (traits: any) => {
           variant: item.variant,
         });
       } else {
+        // eslint-disable-next-line no-lonely-if
         if (item.onlyIfTrue === true && traits[item.key] === false) {
           // Skip
         } else {
@@ -33,6 +35,21 @@ const makeBadges = (traits: any) => {
       }
     }
   });
+
+  if (traits) {
+    Object.keys(traits).forEach((key) => {
+      if (key.startsWith('inferred')) {
+        let traitName: string = key;
+        traitName = traitName.replace(/^inferred/, '').replace(/[_-]/g, ' ');
+        traitName = traitName.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) =>
+          index === 0 ? match.toLowerCase() : match.toUpperCase(),
+        );
+        badges.push({ value: `${traitName}: ${traits[key]}`, variant: 'neutral' });
+      }
+    });
+  }
+  // Interred
+
   console.log(`Total badges (traits) to display ${badges.length} `);
   return badges;
 };
