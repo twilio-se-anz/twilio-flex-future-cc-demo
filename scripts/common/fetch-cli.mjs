@@ -249,6 +249,9 @@ export const fetchConversationsAddresses = () => {
 
   for (const address of conversationsAddresses) {
     for (const wanted in wantedConversationsAddresses) {
+      console.log(
+        `Getting conversation address [${address}] wanted [${wanted}]`
+      );
       if (
         isMatch(
           wantedConversationsAddresses[wanted].name,
